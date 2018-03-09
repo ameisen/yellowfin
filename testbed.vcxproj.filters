@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="rbbuild\gcc_buildhandler.rb">
+      <Filter>rbbuild</Filter>
+    </None>
+    <None Include="rbbuild\path_support.rb">
+      <Filter>rbbuild</Filter>
+    </None>
+    <None Include="rbbuild\rbbuild.rb">
+      <Filter>rbbuild</Filter>
+    </None>
+    <None Include="rbbuild\thread_exec.rb">
+      <Filter>rbbuild</Filter>
+    </None>
+    <None Include="rbbuild\ascii.rb">
+      <Filter>rbbuild</Filter>
+    </None>
+    <None Include="rbbuild\atomic_int.rb">
+      <Filter>rbbuild</Filter>
+    </None>
+    <None Include="rbbuild\buildopts.rb">
+      <Filter>rbbuild</Filter>
+    </None>
+    <None Include="rbbuild\clang_buildhandler.rb">
+      <Filter>rbbuild</Filter>
+    </None>
+    <None Include="Teensy\memcpy-armv7m.S">
+      <Filter>Teensy</Filter>
+    </None>
+    <None Include="Teensy\memset.S">
+      <Filter>Teensy</Filter>
+    </None>
+    <None Include="Teensy\mk66fx1m0.ld">
+      <Filter>Teensy</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="__vm\.testbed.vsarduino.h">
+      <Filter>__vm</Filter>
+    </ClInclude>
+    <ClInclude Include="isr.h" />
+    <ClInclude Include="movement.h" />
+    <ClInclude Include="motion.hpp" />
+    <ClInclude Include="triangle.hpp" />
+    <ClInclude Include="Teensy\Arduino.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\arm_common_tables.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\arm_math.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\AudioStream.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\avr_emulation.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\avr_functions.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\binary.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\Client.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\core_cm4.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\core_cm4_simd.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\core_cmInstr.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\core_id.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\core_pins.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\DMAChannel.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\elapsedMillis.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\EventResponder.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\HardwareSerial.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\IntervalTimer.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\IPAddress.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\Keyboard.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\keylayouts.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\kinetis.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\math_helper.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\mk20dx128.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\Mouse.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\new.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\pgmspace.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\pins_arduino.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\Print.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\Printable.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\ser_print.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\Server.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\SPIFIFO.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\Stream.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\Udp.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_audio.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_desc.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_dev.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_flightsim.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_joystick.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_keyboard.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_mem.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_midi.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_mouse.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_mtp.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_names.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_rawhid.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_seremu.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_serial.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_touch.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\usb_undef.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\WCharacter.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\WConstants.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\wiring.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\wiring_private.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\WProgram.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\WString.h">
+      <Filter>Teensy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\avr\interrupt.h">
+      <Filter>Teensy\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\avr\io.h">
+      <Filter>Teensy\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\avr\pgmspace.h">
+      <Filter>Teensy\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\avr\power.h">
+      <Filter>Teensy\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\avr\sleep.h">
+      <Filter>Teensy\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\avr\wdt.h">
+      <Filter>Teensy\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\avr\eeprom.h">
+      <Filter>Teensy\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\util\delay.h">
+      <Filter>Teensy\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\util\parity.h">
+      <Filter>Teensy\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\util\atomic.h">
+      <Filter>Teensy\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Teensy\util\crc16.h">
+      <Filter>Teensy\util</Filter>
+    </ClInclude>
+    <ClInclude Include="defines.hpp" />
+    <ClInclude Include="pins.hpp" />
+    <ClInclude Include="trapezoid.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="__vm">
+      <UniqueIdentifier>{027f9ec7-2c86-4038-a6a1-c21305ad5ab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rbbuild">
+      <UniqueIdentifier>{6a152b72-6e1b-4e63-9b09-716f4f86a24b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Teensy">
+      <UniqueIdentifier>{5137d513-cd1a-43cd-9f96-f3e6120e7dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Teensy\avr">
+      <UniqueIdentifier>{d986b10d-b502-4841-b047-729ab5c213f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Teensy\util">
+      <UniqueIdentifier>{931611db-783a-47ef-a867-22058b957610}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Teensy\AudioStream.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\avr_emulation.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\DMAChannel.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\eeprom.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\EventResponder.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\HardwareSerial1.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\HardwareSerial2.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\HardwareSerial3.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\HardwareSerial4.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\HardwareSerial5.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\HardwareSerial6.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\IntervalTimer.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\IPAddress.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\keylayouts.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\main.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\math_helper.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\mk20dx128.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\new.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\nonstd.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\pins_teensy.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\Print.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\ser_print.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\serial1.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\serial2.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\serial3.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\serial4.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\serial5.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\serial6.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\serial6_lpuart.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\Stream.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\Tone.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\touch.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_audio.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_desc.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_dev.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_flightsim.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_inst.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_joystick.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_keyboard.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_mem.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_midi.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_mouse.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_mtp.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_rawhid.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_seremu.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_serial.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\usb_touch.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\WMath.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\WString.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\yield.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teensy\analog.c">
+      <Filter>Teensy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+</Project>
