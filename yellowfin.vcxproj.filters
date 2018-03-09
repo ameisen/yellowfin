@@ -247,7 +247,9 @@
     <ClInclude Include="defines.hpp" />
     <ClInclude Include="pins.hpp" />
     <ClInclude Include="trapezoid.hpp" />
-    <ClInclude Include="__vm\.yellowfin.vsarduino.h" />
+    <ClInclude Include="__vm\.yellowfin.vsarduino.h">
+      <Filter>__vm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="__vm">

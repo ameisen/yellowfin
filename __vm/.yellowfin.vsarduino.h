@@ -62,30 +62,15 @@ using __builtin_va_list = void *;
 #undef PSTR
 #define PSTR(string_literal) ((const char *)(string_literal))
 
+#define __INTMAX_C(c) c ## LL
+#define __INT8_C(c) c
+#define __INT64_C(c) c ## LL
+#define __UINT16_C(c) c
+#define __UINT64_C(c) c ## ULL
+#define __INT32_C(c) c ## L
+#define __UINTMAX_C(c) c ## ULL
+#define __UINT8_C(c) c
+#define __UINT32_C(c) c ## UL
+#define __INT16_C(c) c
 
-#undef pgm_read_byte
-#undef pgm_read_word
-#undef pgm_read_dword
-#undef pgm_read_float
-#undef pgm_read_ptr
-
-#define pgm_read_byte(address_short) uint8_t{} 
-#define pgm_read_word(address_short) uint16_t{}
-#define pgm_read_dword(address_short) uint32{}
-#define pgm_read_float(address_short) float{}
-#define pgm_read_ptr(address_short) short{}
-
-inline void __builtin_avr_sei() {}
-inline void __builtin_avr_cli() {}
-inline void __builtin_avr_nop() {}
-inline void __builtin_avr_sleep() {}
-inline void __builtin_avr_wdr() {}
-inline unsigned char __builtin_avr_swap(unsigned char value) {}
-inline unsigned short __builtin_avr_fmul(unsigned char value0, unsigned char value1) {}
-inline signed short __builtin_avr_fmuls(signed char value0, signed char value1) {}
-inline signed short __builtin_avr_fmulsu(signed char value0, unsigned char value1) {}
-inline void __builtin_avr_delay_cycles(unsigned long ticks) {}
-inline unsigned char __builtin_avr_insert_bits(unsigned long map, unsigned char bits, unsigned char value) {}
-
-//#include "Marlin.ino"
 #endif

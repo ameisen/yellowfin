@@ -8,6 +8,8 @@
 #include "motion.hpp"
 #include "pins.hpp"
 
+#include <new>
+
 static constexpr const auto MT = motion::motion_type::floating_point;
 
 template <bool state>
