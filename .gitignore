@@ -6,3 +6,5 @@
 *.elf
 *.eep
 *.hex
+.int
+*.ipch

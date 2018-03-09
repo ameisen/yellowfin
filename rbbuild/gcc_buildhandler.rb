@@ -2,7 +2,7 @@ $script_mtime = [$script_mtime, File.mtime(__FILE__).to_f].max
 
 require_relative 'path_support.rb'
 
-$ARDUINO_BIN_PATH = "C:/Program Files (x86)/GNU Tools ARM Embedded/7 2017-q4-major/bin/"
+$BIN_PATH = best_path(ENV["ARME_PATH"] + "/bin", Dir.pwd) + "/"
 
 # set this to true if you want to speed up compilation/link. This will disable the most expensive optimizations.
 # the speedup will be dramatic.
@@ -43,19 +43,19 @@ $gpp_buildhandler = Class.new do
 	end
 	
 	def self.gpp_path
-		return quote_wrap($ARDUINO_BIN_PATH + "arm-none-eabi-g++.exe")
+		return quote_wrap($BIN_PATH + "arm-none-eabi-g++.exe")
 	end
 	
 	def self.gcc_path
-		return quote_wrap($ARDUINO_BIN_PATH + "arm-none-eabi-gcc.exe")
+		return quote_wrap($BIN_PATH + "arm-none-eabi-gcc.exe")
 	end
 	
 	def self.archiver_path
-		return quote_wrap($ARDUINO_BIN_PATH + "arm-none-eabi-gcc-ar.exe")
+		return quote_wrap($BIN_PATH + "arm-none-eabi-gcc-ar.exe")
 	end
 	
 	def self.objcopy_path
-		return quote_wrap($ARDUINO_BIN_PATH + "arm-none-eabi-objcopy.exe")
+		return quote_wrap($BIN_PATH + "arm-none-eabi-objcopy.exe")
 	end
 
 	def self.compile_args(source = "dummy.cpp")
@@ -212,11 +212,11 @@ $gpp_buildhandler = Class.new do
 			"--param asan-instrument-writes=0",
 			"--param asan-memintrin=0",
 			"--param asan-use-after-return=0",
-			"-I#{quote_wrap(best_path("C:/Program Files (x86)/GNU Tools ARM Embedded/7 2017-q4-major/arm-none-eabi/include", Dir.pwd))}",
+			"-I#{quote_wrap(best_path(ENV["ARME_PATH"] + "/arm-none-eabi/include", Dir.pwd))}",
 			"-I.",
 			"-I./Teensy",
 			#"-nostdlib",
-			"-MMD -fsingle-precision-constant -D__MK66FX1M0__=1 -DTEENSYDUINO=140 -DARDUINO=10804 -DF_CPU=240000000 -DUSB_SERIAL=1 -DLAYOUT_US_ENGLISH=1",
+			"-MMD -D__MK66FX1M0__=1 -DTEENSYDUINO=140 -DARDUINO=10804 -DF_CPU=240000000 -DUSB_SERIAL=1 -DLAYOUT_US_ENGLISH=1",
 			"-mpure-code -D__PURE_CODE__",
 		]
 
@@ -305,7 +305,6 @@ $gpp_buildhandler = Class.new do
 		end
 		
 		pipe = IO.popen(command)
-		output = pipe.readlines(nil)
 		pipe.close
 		if ($? != 0)
 			raise RuntimeError.new("Failed to compile \"#{source}\" - return code #{$?.to_s}")
