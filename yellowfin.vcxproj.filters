@@ -43,13 +43,7 @@
     <ClInclude Include="Teensy\Arduino.h">
       <Filter>Teensy</Filter>
     </ClInclude>
-    <ClInclude Include="Teensy\arm_common_tables.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
     <ClInclude Include="Teensy\arm_math.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\AudioStream.h">
       <Filter>Teensy</Filter>
     </ClInclude>
     <ClInclude Include="Teensy\avr_emulation.h">
@@ -94,15 +88,6 @@
     <ClInclude Include="Teensy\IntervalTimer.h">
       <Filter>Teensy</Filter>
     </ClInclude>
-    <ClInclude Include="Teensy\IPAddress.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\Keyboard.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\keylayouts.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
     <ClInclude Include="Teensy\kinetis.h">
       <Filter>Teensy</Filter>
     </ClInclude>
@@ -110,9 +95,6 @@
       <Filter>Teensy</Filter>
     </ClInclude>
     <ClInclude Include="Teensy\mk20dx128.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\Mouse.h">
       <Filter>Teensy</Filter>
     </ClInclude>
     <ClInclude Include="Teensy\new.h">
@@ -137,9 +119,6 @@
       <Filter>Teensy</Filter>
     </ClInclude>
     <ClInclude Include="Teensy\Stream.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\Udp.h">
       <Filter>Teensy</Filter>
     </ClInclude>
     <ClInclude Include="Teensy\usb_desc.h">
@@ -236,9 +215,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Teensy\AudioStream.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
     <ClCompile Include="Teensy\avr_emulation.cpp">
       <Filter>Teensy</Filter>
     </ClCompile>
@@ -270,12 +246,6 @@
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Teensy\IntervalTimer.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\IPAddress.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\keylayouts.c">
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Teensy\main.cpp">
@@ -324,12 +294,6 @@
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Teensy\Stream.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\Tone.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\touch.c">
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Teensy\usb_desc.c">

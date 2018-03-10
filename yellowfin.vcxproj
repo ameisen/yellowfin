@@ -84,9 +84,7 @@
     <ClInclude Include="movement.h" />
     <ClInclude Include="pins.hpp" />
     <ClInclude Include="Teensy\Arduino.h" />
-    <ClInclude Include="Teensy\arm_common_tables.h" />
     <ClInclude Include="Teensy\arm_math.h" />
-    <ClInclude Include="Teensy\AudioStream.h" />
     <ClInclude Include="Teensy\avr\eeprom.h" />
     <ClInclude Include="Teensy\avr\interrupt.h" />
     <ClInclude Include="Teensy\avr\io.h" />
@@ -108,13 +106,9 @@
     <ClInclude Include="Teensy\EventResponder.h" />
     <ClInclude Include="Teensy\HardwareSerial.h" />
     <ClInclude Include="Teensy\IntervalTimer.h" />
-    <ClInclude Include="Teensy\IPAddress.h" />
-    <ClInclude Include="Teensy\Keyboard.h" />
-    <ClInclude Include="Teensy\keylayouts.h" />
     <ClInclude Include="Teensy\kinetis.h" />
     <ClInclude Include="Teensy\math_helper.h" />
     <ClInclude Include="Teensy\mk20dx128.h" />
-    <ClInclude Include="Teensy\Mouse.h" />
     <ClInclude Include="Teensy\new.h" />
     <ClInclude Include="Teensy\pins_arduino.h" />
     <ClInclude Include="Teensy\Print.h" />
@@ -123,7 +117,6 @@
     <ClInclude Include="Teensy\ser_print.h" />
     <ClInclude Include="Teensy\SPIFIFO.h" />
     <ClInclude Include="Teensy\Stream.h" />
-    <ClInclude Include="Teensy\Udp.h" />
     <ClInclude Include="Teensy\usb_desc.h" />
     <ClInclude Include="Teensy\usb_dev.h" />
     <ClInclude Include="Teensy\usb_mem.h" />
@@ -147,7 +140,6 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Teensy\analog.c" />
-    <ClCompile Include="Teensy\AudioStream.cpp" />
     <ClCompile Include="Teensy\avr_emulation.cpp" />
     <ClCompile Include="Teensy\DMAChannel.cpp" />
     <ClCompile Include="Teensy\eeprom.c" />
@@ -159,8 +151,6 @@
     <ClCompile Include="Teensy\HardwareSerial5.cpp" />
     <ClCompile Include="Teensy\HardwareSerial6.cpp" />
     <ClCompile Include="Teensy\IntervalTimer.cpp" />
-    <ClCompile Include="Teensy\IPAddress.cpp" />
-    <ClCompile Include="Teensy\keylayouts.c" />
     <ClCompile Include="Teensy\main.cpp" />
     <ClCompile Include="Teensy\math_helper.c" />
     <ClCompile Include="Teensy\mk20dx128.c" />
@@ -177,8 +167,6 @@
     <ClCompile Include="Teensy\serial6_lpuart.c" />
     <ClCompile Include="Teensy\ser_print.c" />
     <ClCompile Include="Teensy\Stream.cpp" />
-    <ClCompile Include="Teensy\Tone.cpp" />
-    <ClCompile Include="Teensy\touch.c" />
     <ClCompile Include="Teensy\usb_desc.c" />
     <ClCompile Include="Teensy\usb_dev.c" />
     <ClCompile Include="Teensy\usb_inst.cpp" />
