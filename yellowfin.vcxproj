@@ -124,7 +124,6 @@
     <ClInclude Include="Teensy\wiring.h" />
     <ClInclude Include="Teensy\wiring_private.h" />
     <ClInclude Include="Teensy\WProgram.h" />
-    <ClInclude Include="Teensy\WString.h" />
     <ClInclude Include="trapezoid.hpp" />
     <ClInclude Include="triangle.hpp" />
     <ClInclude Include="__vm\.yellowfin.vsarduino.h" />
@@ -162,7 +161,6 @@
     <ClCompile Include="Teensy\usb_inst.cpp" />
     <ClCompile Include="Teensy\usb_mem.c" />
     <ClCompile Include="Teensy\usb_serial.c" />
-    <ClCompile Include="Teensy\WString.cpp" />
     <ClCompile Include="Teensy\yield.cpp" />
   </ItemGroup>
   <PropertyGroup>

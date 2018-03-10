@@ -93,6 +93,7 @@ static inline void eeprom_update_block(const void *buf, void *addr, uint32_t len
 
 
 char * __attribute__((flatten)) ultoa(unsigned long val, char * __restrict buf, unsigned int radix);
+uint32_t __attribute__((flatten)) ultoa_sz_nz(unsigned long val, char * __restrict buf, unsigned int radix);
 char * __attribute__((flatten)) ltoa(long val, char * __restrict buf, unsigned int radix);
 
 #if defined(_NEWLIB_VERSION) && (__NEWLIB__ < 2 || __NEWLIB__ == 2 && __NEWLIB_MINOR__ < 2)

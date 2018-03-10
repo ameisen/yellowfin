@@ -33,9 +33,14 @@
 #include <stdlib.h>
 #include <math.h>
 
+#ifndef __assume
+# define __assume(c) if (!(c)) { __builtin_unreachable; }
+#endif
 
 char * __attribute__((flatten)) ultoa(unsigned long val, char * __restrict buf, unsigned int radix)
 {
+  __assume(radix <= 16);
+
 	unsigned digit;
 	int i=0, j;
 	char t;
@@ -56,8 +61,33 @@ char * __attribute__((flatten)) ultoa(unsigned long val, char * __restrict buf, 
 	return buf;
 }
 
+uint32_t __attribute__((flatten)) ultoa_sz_nz(unsigned long val, char * __restrict buf, unsigned int radix)
+{
+  __assume(radix <= 16);
+
+  unsigned digit;
+  int i = 0, j;
+  char t;
+
+  while (1) {
+    digit = val % radix;
+    buf[i] = ((digit < 10) ? '0' + digit : 'A' + digit - 10);
+    val /= radix;
+    if (val == 0) break;
+    i++;
+  }
+  for (j = 0; j < i; j++, i--) {
+    t = buf[j];
+    buf[j] = buf[i];
+    buf[i] = t;
+  }
+  return i + 1;
+}
+
 char * __attribute__((flatten)) ltoa(long val, char * __restrict buf, unsigned int radix)
 {
+  __assume(radix <= 16);
+
 	if (val >= 0) {
 		return ultoa(val, buf, radix);
 	} else {

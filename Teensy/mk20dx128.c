@@ -326,6 +326,7 @@ void (__attribute__((interrupt)) * const _VectorsFlash[NVIC_NUM_INTERRUPTS+16])(
 	pit3_isr,					// 49 PIT Channel 3
 	pdb_isr,					// 50 PDB Programmable Delay Block
 	usb_isr,					// 51 USB OTG
+#define USB_ISR_NUM 51
 	usb_charge_isr,					// 52 USB Charger Detect
 	tsi0_isr,					// 53 TSI0
 	mcg_isr,					// 54 MCG
@@ -411,6 +412,7 @@ void (__attribute__((interrupt)) * const _VectorsFlash[NVIC_NUM_INTERRUPTS+16])(
 	pit3_isr,					// 87 PIT Channel 3
 	pdb_isr,					// 88 PDB Programmable Delay Block
 	usb_isr,					// 89 USB OTG
+#define USB_ISR_NUM 89
 	usb_charge_isr,					// 90 USB Charger Detect
 	unused_isr,					// 91 --
 	unused_isr,					// 92 --
@@ -458,6 +460,7 @@ void (__attribute__((interrupt)) * const _VectorsFlash[NVIC_NUM_INTERRUPTS+16])(
 	pit_isr,					// 38 PIT Both Channels
 	i2s0_isr,					// 39 I2S0 Transmit & Receive
 	usb_isr,					// 40 USB OTG
+#define USB_ISR_NUM 40
 	dac0_isr,					// 41 DAC0
 	tsi0_isr,					// 42 TSI0
 	mcg_isr,					// 43 MCG
@@ -520,6 +523,7 @@ void (__attribute__((interrupt)) * const _VectorsFlash[NVIC_NUM_INTERRUPTS+16])(
 	pit3_isr,					// 67 PIT Channel 3
 	pdb_isr,					// 68 PDB Programmable Delay Block
 	usb_isr,					// 69 USB OTG
+#define USB_ISR_NUM 69
 	usb_charge_isr,					// 70 USB Charger Detect
 	unused_isr,					// 71 --
 	dac0_isr,					// 72 DAC0
@@ -607,6 +611,7 @@ void (__attribute__((interrupt)) * const _VectorsFlash[NVIC_NUM_INTERRUPTS+16])(
 	pit3_isr,					// 67 PIT Channel 3
 	pdb_isr,					// 68 PDB Programmable Delay Block
 	usb_isr,					// 69 USB OTG
+#define USB_ISR_NUM 69
 	usb_charge_isr,					// 70 USB Charger Detect
 	unused_isr,					// 71 --
 	dac0_isr,					// 72 DAC0
@@ -757,7 +762,7 @@ void ResetHandler(void)
 	}
 #endif
 	// release I/O pins hold, if we woke up from VLLS mode
-	if (PMC_REGSC & PMC_REGSC_ACKISO) PMC_REGSC |= PMC_REGSC_ACKISO;
+	if (__unlikely(PMC_REGSC & PMC_REGSC_ACKISO)) PMC_REGSC |= PMC_REGSC_ACKISO;
 
     // since this is a write once register, make it visible to all F_CPU's
     // so we can into other sleep modes in the future at any speed
@@ -1177,7 +1182,7 @@ void * _sbrk(int incr)
 	prev = __brkval;
 	if (incr != 0) {
 		__asm__ volatile("mov %0, sp" : "=r" (stack) ::);
-		if (prev + incr >= stack - STACK_MARGIN) {
+		if (__unlikely(prev + incr >= stack - STACK_MARGIN)) {
 			errno = ENOMEM;
 			return (void *)-1;
 		}

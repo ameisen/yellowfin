@@ -5666,6 +5666,86 @@ typedef struct __attribute__((packed)) {
 #define __disable_irq() __asm__ volatile("CPSID i":::"memory");
 #define __enable_irq()	__asm__ volatile("CPSIE i":::"memory");
 
+#if !__cplusplus
+# ifndef false
+#   define false 0
+# endif
+# ifndef true
+#   define true 1
+# endif
+#endif
+
+// https://stackoverflow.com/questions/5745880/simulating-ldrex-strex-load-store-exclusive-in-cortex-m0
+#ifndef __unlikely
+# define __unlikely(c) (__builtin_expect((c), false))
+#endif
+#ifndef __likely
+# define __likely(c) (__builtin_expect((c), true))
+#endif
+#ifndef __assume
+# define __assume(c) if (!(c)) { __builtin_unreachable; }
+#endif
+
+static inline uint32_t atomic_LL(volatile uint32_t * __restrict addr)
+{
+  __assume(addr != NULL);
+
+  uint32_t dest;
+
+  __asm__ __volatile__("ldrex %0, [%1]" : "=r" (dest) : "r" (addr));
+  return dest;
+}
+
+static inline uint32_t atomic_SC(volatile uint32_t * __restrict addr, uint32_t value)
+{
+  __assume(addr != NULL);
+
+  uint32_t dest;
+
+  __asm__ __volatile__("strex %0, %2, [%1]" :
+  "=&r" (dest) : "r" (addr), "r" (value) : "memory");
+
+  __assume(dest == 0 || dest == 1);
+
+  return dest;
+}
+
+static inline uint32_t cas_u32(volatile uint32_t * __restrict addr, uint32_t expected, uint32_t store)
+{
+  __assume(addr != NULL);
+
+  uint32_t ret;
+
+  do {
+    if (__unlikely(atomic_LL(addr) != expected))
+      return 1;
+  } while (__unlikely((ret = atomic_SC(addr, store))));
+  __assume(ret == 0 || ret == 1);
+  return ret;
+}
+
+static inline void __enable_irqn(uint32_t irq)
+{
+  __assume(irq < (NVIC_NUM_INTERRUPTS + 16));
+
+  // This can be improved using C++
+  const uint32_t iser_offset = irq >> 5;
+  volatile uint32_t * ISER_PTR = &NVIC_ICER0;
+  ISER_PTR[iser_offset] = ((uint32_t)1) << (irq & 0x1F);
+}
+
+static inline void __disable_irqn(uint32_t irq)
+{
+  __assume(irq < (NVIC_NUM_INTERRUPTS + 16));
+
+  // This can be improved using C++
+  const uint32_t iser_offset = irq >> 5;
+  volatile uint32_t * ICER_PTR = &NVIC_ICER0;
+  ICER_PTR[iser_offset] = ((uint32_t)1) << (irq & 0x1F);
+  __asm__ volatile ("dsb");
+  __asm__ volatile ("isb");
+}
+
 // System Control Space (SCS), ARMv7 ref manual, B3.2, page 708
 #define SCB_CPUID		(*(const    uint32_t *)0xE000ED00) // CPUID Base Register
 #define SCB_ICSR		(*(volatile uint32_t *)0xE000ED04) // Interrupt Control and State

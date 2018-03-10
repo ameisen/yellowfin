@@ -394,7 +394,7 @@ protected:
 // DMASetting represents settings stored only in memory, which can be
 // applied to any DMA channel.
 
-class DMASetting : public DMABaseClass {
+class DMASetting final : public DMABaseClass {
 public:
 	DMASetting() {
 		TCD = &tcddata;
@@ -418,7 +418,7 @@ private:
 
 // DMAChannel reprents an actual DMA channel and its current settings
 
-class DMAChannel : public DMABaseClass {
+class DMAChannel final : public DMABaseClass {
 public:
 	/*************************************************/
 	/**    Channel Allocation                       **/
@@ -884,7 +884,7 @@ private:
 // DMASetting represents settings stored only in memory, which can be
 // applied to any DMA channel.
 
-class DMASetting : public DMABaseClass {
+class DMASetting final : public DMABaseClass {
 public:
 	DMASetting() {
 		cfgdata.SAR = NULL;
@@ -912,7 +912,7 @@ private:
 
 // DMAChannel reprents an actual DMA channel and its current settings
 
-class DMAChannel : public DMABaseClass {
+class DMAChannel final : public DMABaseClass {
 public:
 	/*************************************************/
 	/**    Channel Allocation                       **/

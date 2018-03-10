@@ -31,7 +31,7 @@
 #include "WProgram.h"
 #endif
 
-class elapsedMillis
+class elapsedMillis final
 {
 private:
 	unsigned long ms;
@@ -54,7 +54,7 @@ public:
 	elapsedMillis operator + (unsigned long val) const { elapsedMillis r(*this); r.ms -= val; return r; }
 };
 
-class elapsedMicros
+class elapsedMicros final
 {
 private:
 	unsigned long us;

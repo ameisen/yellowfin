@@ -82,13 +82,13 @@ void usb_free(usb_packet_t *p)
 
 	//serial_print("free:");
 	n = ((uint8_t *)p - usb_buffer_memory) / sizeof(usb_packet_t);
-	if (n >= NUM_USB_BUFFERS) return;
+	if (__unlikely(n >= NUM_USB_BUFFERS)) return;
 	//serial_phex(n);
 	//serial_print("\n");
 
 	// if any endpoints are starving for memory to receive
 	// packets, give this memory to them immediately!
-	if (usb_rx_memory_needed && usb_configuration) {
+	if (usb_rx_memory_needed && __likely(!!usb_configuration)) {
 		//serial_print("give to rx:");
 		//serial_phex32((int)p);
 		//serial_print("\n");

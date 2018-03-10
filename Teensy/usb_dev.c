@@ -275,7 +275,7 @@ static void usb_setup(void)
 		break;
 	  case 0x0082: // GET_STATUS (endpoint)
 		i = setup.wIndex & 0x7F;
-		if (i > NUM_ENDPOINTS) {
+		if (__unlikely(i > NUM_ENDPOINTS)) {
 			// TODO: do we need to handle IN vs OUT here?
 			endpoint0_stall();
 			return;
@@ -288,7 +288,7 @@ static void usb_setup(void)
 		break;
 	  case 0x0102: // CLEAR_FEATURE (endpoint)
 		i = setup.wIndex & 0x7F;
-		if (i > NUM_ENDPOINTS || setup.wValue != 0) {
+		if (__unlikely(i > NUM_ENDPOINTS) || setup.wValue != 0) {
 			// TODO: do we need to handle IN vs OUT here?
 			endpoint0_stall();
 			return;
@@ -298,7 +298,7 @@ static void usb_setup(void)
 		break;
 	  case 0x0302: // SET_FEATURE (endpoint)
 		i = setup.wIndex & 0x7F;
-		if (i > NUM_ENDPOINTS || setup.wValue != 0) {
+		if (__unlikely(i > NUM_ENDPOINTS) || setup.wValue != 0) {
 			// TODO: do we need to handle IN vs OUT here?
 			endpoint0_stall();
 			return;
@@ -661,7 +661,7 @@ usb_packet_t *usb_rx(uint32_t endpoint)
 {
 	usb_packet_t * __restrict ret;
 	endpoint--;
-	if (endpoint >= NUM_ENDPOINTS) return NULL;
+	if (__unlikely(endpoint >= NUM_ENDPOINTS)) return NULL;
 	__disable_irq();
 	ret = rx_first[endpoint];
 	if (ret) {
@@ -703,7 +703,7 @@ uint32_t usb_rx_byte_count(uint32_t endpoint)
 uint32_t usb_tx_byte_count(uint32_t endpoint)
 {
 	endpoint--;
-	if (endpoint >= NUM_ENDPOINTS) return 0;
+	if (__unlikely(endpoint >= NUM_ENDPOINTS)) return 0;
 	return usb_queue_byte_count(tx_first[endpoint]);
 }
 
@@ -713,7 +713,7 @@ uint32_t usb_tx_packet_count(uint32_t endpoint)
 	uint32_t count=0;
 
 	endpoint--;
-	if (endpoint >= NUM_ENDPOINTS) return 0;
+	if (__unlikely(endpoint >= NUM_ENDPOINTS)) return 0;
 	__disable_irq();
 	for (p = tx_first[endpoint]; p; p = p->next) count++;
 	__enable_irq();
@@ -780,7 +780,7 @@ void usb_tx(uint32_t endpoint, usb_packet_t * __restrict packet)
 	uint8_t next;
 
 	endpoint--;
-	if (endpoint >= NUM_ENDPOINTS) return;
+	if (__unlikely(endpoint >= NUM_ENDPOINTS)) return;
 	__disable_irq();
 	//serial_print("txstate=");
 	//serial_phex(tx_state[endpoint]);
@@ -822,7 +822,7 @@ void usb_tx_isochronous(uint32_t endpoint, void *data, uint32_t len)
 	uint8_t next, state;
 
 	endpoint--;
-	if (endpoint >= NUM_ENDPOINTS) return;
+	if (__unlikely(endpoint >= NUM_ENDPOINTS)) return;
 	__disable_irq();
 	state = tx_state[endpoint];
 	if (state == 0) {
@@ -862,7 +862,7 @@ __attribute__((interrupt, used)) void usb_isr(void)
 			t = usb_reboot_timer;
 			if (t) {
 				usb_reboot_timer = --t;
-				if (!t) _reboot_Teensyduino_();
+				if (__unlikely(!t)) _reboot_Teensyduino_();
 			}
 #ifdef CDC_DATA_INTERFACE
 			t = usb_cdc_transmit_flush_timer;
@@ -1029,7 +1029,7 @@ __attribute__((interrupt, used)) void usb_isr(void)
 
 
 
-	if (status & USB_ISTAT_USBRST /* 01 */ ) {
+	if (__unlikely(status & USB_ISTAT_USBRST) /* 01 */ ) {
 		//serial_print("reset\n");
 
 		// initialize BDT toggle bits
@@ -1069,12 +1069,12 @@ __attribute__((interrupt, used)) void usb_isr(void)
 	}
 
 
-	if ((status & USB_ISTAT_STALL /* 80 */ )) {
+	if ((__unlikely(status & USB_ISTAT_STALL) /* 80 */ )) {
 		//serial_print("stall:\n");
 		USB0_ENDPT0 = USB_ENDPT_EPRXEN | USB_ENDPT_EPTXEN | USB_ENDPT_EPHSHK;
 		USB0_ISTAT = USB_ISTAT_STALL;
 	}
-	if ((status & USB_ISTAT_ERROR /* 02 */ )) {
+	if ((__unlikely(status & USB_ISTAT_ERROR) /* 02 */ )) {
 		uint8_t err = USB0_ERRSTAT;
 		USB0_ERRSTAT = err;
 		//serial_print("err:");
@@ -1083,7 +1083,7 @@ __attribute__((interrupt, used)) void usb_isr(void)
 		USB0_ISTAT = USB_ISTAT_ERROR;
 	}
 
-	if ((status & USB_ISTAT_SLEEP /* 10 */ )) {
+	if ((__unlikely(status & USB_ISTAT_SLEEP) /* 10 */ )) {
 		//serial_print("sleep\n");
 		USB0_ISTAT = USB_ISTAT_SLEEP;
 	}

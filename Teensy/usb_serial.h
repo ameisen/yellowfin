@@ -45,7 +45,7 @@ extern "C" {
 #endif
 int usb_serial_getchar(void);
 int usb_serial_peekchar(void);
-int usb_serial_available(void);
+uint32_t usb_serial_available(void);
 int usb_serial_read(void *buffer, uint32_t size);
 void usb_serial_flush_input(void);
 int usb_serial_putchar(uint8_t c);
@@ -86,7 +86,7 @@ public:
 		//}
 	}
         void end() __restrict { /* TODO: flush output and shut down USB port */ };
-        virtual int available() override final __restrict { return usb_serial_available(); }
+        virtual uint32_t available() override final __restrict { return usb_serial_available(); }
         virtual int read() override final __restrict { return usb_serial_getchar(); }
         virtual int peek() override final __restrict { return usb_serial_peekchar(); }
         virtual void flush() override final __restrict { usb_serial_flush_output(); }  // TODO: actually wait for data to leave USB...
@@ -132,7 +132,7 @@ extern void serialEvent(void);
 // Allow Arduino programs using Serial to compile, but Serial will do nothing.
 #ifdef __cplusplus
 #include "Stream.h"
-class usb_serial_class : public Stream
+class usb_serial_class final : public Stream
 {
 public:
 	constexpr usb_serial_class() {}

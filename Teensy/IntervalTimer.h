@@ -37,7 +37,7 @@
 extern "C" {
 #endif
 
-class IntervalTimer {
+class IntervalTimer final {
 private:
 	static const uint32_t MAX_PERIOD = UINT32_MAX / (F_BUS / 1000000.0);
 public:

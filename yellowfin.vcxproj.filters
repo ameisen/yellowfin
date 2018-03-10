@@ -142,9 +142,6 @@
     <ClInclude Include="Teensy\WProgram.h">
       <Filter>Teensy</Filter>
     </ClInclude>
-    <ClInclude Include="Teensy\WString.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
     <ClInclude Include="Teensy\avr\sleep.h">
       <Filter>Teensy\avr</Filter>
     </ClInclude>
@@ -276,9 +273,6 @@
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Teensy\usb_serial.c">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\WString.cpp">
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Teensy\yield.cpp">

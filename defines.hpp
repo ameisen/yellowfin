@@ -26,9 +26,15 @@ using int64 = int64_t;
 #else
 # define __unreachable __builtin_unreachable()
 # define __forceinline __attribute__((always_inline))
-# define __assume(c) { if (!(c)) { __unreachable; } }
-# define __likely(c) (__builtin_expect(c, true))
-# define __unlikely(c) (__builtin_expect(c, false))
+# ifndef __assume
+#   define __assume(c) { if (!(c)) { __unreachable; } }
+# endif
+# ifndef __likely
+#   define __likely(c) (__builtin_expect((c), true))
+# endif
+# ifndef __unlikely
+#   define __unlikely(c) (__builtin_expect((c), false))
+# endif
 # define __flatten __attribute__((flatten))
 #endif
 

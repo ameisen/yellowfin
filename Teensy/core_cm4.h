@@ -52,6 +52,8 @@
   @{
  */
 
+typedef uint32_t IRQn_Type;
+
 /*  CMSIS CM4 definitions */
 #define __CM4_CMSIS_VERSION_MAIN  (0x03)                                   /*!< [31:16] CMSIS HAL main version   */
 #define __CM4_CMSIS_VERSION_SUB   (0x01)                                   /*!< [15:0]  CMSIS HAL sub version    */

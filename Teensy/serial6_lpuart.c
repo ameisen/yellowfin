@@ -28,6 +28,8 @@
  * SOFTWARE.
  */
 
+#if ENABLE_SERIAL6 == 1
+
 #include "kinetis.h"
 #include "core_pins.h"
 #include "HardwareSerial.h"
@@ -461,3 +463,5 @@ __attribute__((interrupt)) void lpuart0_status_isr(void)
 }
 
 #endif // HAS_KINETISK_UART4
+
+#endif

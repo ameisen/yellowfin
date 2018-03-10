@@ -258,7 +258,7 @@ void serial6_clear(void);
 #ifdef __cplusplus
 #include "Stream.h"
 #if ENABLE_SERIAL1 == 1
-class HardwareSerial : public Stream
+class HardwareSerial final : public Stream
 {
 public:
 	constexpr HardwareSerial() {}
@@ -297,7 +297,7 @@ extern void serialEvent1(void);
 #endif
 
 #if ENABLE_SERIAL2 == 1
-class HardwareSerial2 : public HardwareSerial
+class HardwareSerial2 final : public HardwareSerial
 {
 public:
 	constexpr HardwareSerial2() {}
@@ -336,7 +336,7 @@ extern void serialEvent2(void);
 #endif
 
 #if ENABLE_SERIAL3 == 1
-class HardwareSerial3 : public HardwareSerial
+class HardwareSerial3 final : public HardwareSerial
 {
 public:
 	constexpr HardwareSerial3() {}
@@ -375,7 +375,7 @@ extern void serialEvent3(void);
 #endif
 
 #if ENABLE_SERIAL4 == 1
-class HardwareSerial4 : public HardwareSerial
+class HardwareSerial4 final : public HardwareSerial
 {
 public:
 	constexpr HardwareSerial4() {}
@@ -414,7 +414,7 @@ extern void serialEvent4(void);
 #endif
 
 #if ENABLE_SERIAL5 == 1
-class HardwareSerial5 : public HardwareSerial
+class HardwareSerial5 final : public HardwareSerial
 {
 public:
 	constexpr HardwareSerial5() {}
@@ -453,7 +453,7 @@ extern void serialEvent5(void);
 #endif
 
 #if ENABLE_SERIAL6 == 1
-class HardwareSerial6 : public HardwareSerial
+class HardwareSerial6 final : public HardwareSerial
 {
 public:
 	constexpr HardwareSerial6() {}

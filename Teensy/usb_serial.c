@@ -34,6 +34,16 @@
 //#include "HardwareSerial.h"
 #include <string.h> // for memcpy()
 
+# ifndef __assume
+#   define __assume(c) { if (!(c)) { __unreachable; } }
+# endif
+# ifndef __likely
+#   define __likely(c) (__builtin_expect((c), true))
+# endif
+# ifndef __unlikely
+#   define __unlikely(c) (__builtin_expect((c), false))
+# endif
+
 // defined by usb_dev.h -> usb_desc.h
 #if defined(CDC_STATUS_INTERFACE) && defined(CDC_DATA_INTERFACE)
 #if F_CPU >= 20000000
@@ -56,7 +66,7 @@ int usb_serial_getchar(void)
 	int c;
 
 	if (!rx_packet) {
-		if (!usb_configuration) return -1;
+		if (__unlikely(!usb_configuration)) return -1;
 		rx_packet = usb_rx(CDC_RX_ENDPOINT);
 		if (!rx_packet) return -1;
 	}
@@ -75,16 +85,15 @@ int usb_serial_getchar(void)
 int usb_serial_peekchar(void)
 {
 	if (!rx_packet) {
-		if (!usb_configuration) return -1;
+		if (__unlikely(!usb_configuration)) return -1;
 		rx_packet = usb_rx(CDC_RX_ENDPOINT);
-		if (!rx_packet) return -1;
 	}
 	if (!rx_packet) return -1;
 	return rx_packet->buf[rx_packet->index];
 }
 
 // number of bytes available in the receive buffer
-int usb_serial_available(void)
+uint32_t usb_serial_available(void)
 {
 	int count;
 	count = usb_rx_byte_count(CDC_RX_ENDPOINT);
@@ -99,7 +108,7 @@ int usb_serial_read(void *buffer, uint32_t size)
 	uint32_t qty, count=0;
 
 	while (size) {
-		if (!usb_configuration) break;
+		if (__unlikely(!usb_configuration)) break;
 		if (!rx_packet) {
 			rx:
 			rx_packet = usb_rx(CDC_RX_ENDPOINT);
@@ -129,7 +138,7 @@ void usb_serial_flush_input(void)
 {
 	usb_packet_t * __restrict rx;
 
-	if (!usb_configuration) return;
+	if (__unlikely(!usb_configuration)) return;
 	if (rx_packet) {
 		usb_free(rx_packet);
 		rx_packet = NULL;
@@ -149,29 +158,7 @@ void usb_serial_flush_input(void)
 // software.  If it's too long, we stall the user's program when no software is running.
 #define TX_TIMEOUT_MSEC 70
 
-#if F_CPU == 240000000
-  #define TX_TIMEOUT (TX_TIMEOUT_MSEC * 1600)
-#elif F_CPU == 216000000
-  #define TX_TIMEOUT (TX_TIMEOUT_MSEC * 1440)
-#elif F_CPU == 192000000
-  #define TX_TIMEOUT (TX_TIMEOUT_MSEC * 1280)
-#elif F_CPU == 180000000
-  #define TX_TIMEOUT (TX_TIMEOUT_MSEC * 1200)
-#elif F_CPU == 168000000
-  #define TX_TIMEOUT (TX_TIMEOUT_MSEC * 1100)
-#elif F_CPU == 144000000
-  #define TX_TIMEOUT (TX_TIMEOUT_MSEC * 932)
-#elif F_CPU == 120000000
-  #define TX_TIMEOUT (TX_TIMEOUT_MSEC * 764)
-#elif F_CPU == 96000000
-  #define TX_TIMEOUT (TX_TIMEOUT_MSEC * 596)
-#elif F_CPU == 72000000
-  #define TX_TIMEOUT (TX_TIMEOUT_MSEC * 512)
-#elif F_CPU == 48000000
-  #define TX_TIMEOUT (TX_TIMEOUT_MSEC * 428)
-#elif F_CPU == 24000000
-  #define TX_TIMEOUT (TX_TIMEOUT_MSEC * 262)
-#endif
+#define TX_TIMEOUT (TX_TIMEOUT_MSEC * (F_CPU / 150000))
 
 // When we've suffered the transmit timeout, don't wait again until the computer
 // begins accepting data.  If no software is running to receive, we'll just discard
@@ -200,7 +187,7 @@ int usb_serial_write(const void * __restrict buffer, uint32_t size)
 		if (!tx_packet) {
 			wait_count = 0;
 			while (1) {
-				if (!usb_configuration) {
+				if (__unlikely(!usb_configuration)) {
 					tx_noautoflush = 0;
 					return -1;
 				}
@@ -210,7 +197,7 @@ int usb_serial_write(const void * __restrict buffer, uint32_t size)
 					if (tx_packet) break;
 					tx_noautoflush = 0;
 				}
-				if (++wait_count > TX_TIMEOUT || transmit_previous_timeout) {
+				if (__unlikely(++wait_count > TX_TIMEOUT) || __unlikely(transmit_previous_timeout != 0)) {
 					transmit_previous_timeout = 1;
 					return -1;
 				}
@@ -241,7 +228,7 @@ int usb_serial_write_buffer_free(void)
 
 	tx_noautoflush = 1;
 	if (!tx_packet) {
-		if (!usb_configuration ||
+		if (__unlikely(!usb_configuration) ||
 		  usb_tx_packet_count(CDC_TX_ENDPOINT) >= TX_PACKET_LIMIT ||
 		  (tx_packet = usb_malloc()) == NULL) {
 			tx_noautoflush = 0;
@@ -262,7 +249,7 @@ int usb_serial_write_buffer_free(void)
 
 void usb_serial_flush_output(void)
 {
-	if (!usb_configuration) return;
+	if (__unlikely(!usb_configuration)) return;
 	tx_noautoflush = 1;
 	if (tx_packet) {
 		usb_cdc_transmit_flush_timer = 0;
