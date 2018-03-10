@@ -662,7 +662,7 @@ const uint8_t flashconfigbytes[16] = {
 // time, and the user has added a crystal, the RTC will automatically
 // begin at the time of the first upload.
 #ifndef TIME_T
-#define TIME_T 1349049600 // default 1 Oct 2012 (never used, Arduino sets this)
+#define TIME_T 1520645752 // default 1 Oct 2012 (never used, Arduino sets this)
 #endif
 extern void *__rtc_localtime; // Arduino build process sets this
 extern void rtc_set(unsigned long t);
