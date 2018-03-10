@@ -76,9 +76,6 @@
     <ClInclude Include="Teensy\HardwareSerial.h">
       <Filter>Teensy</Filter>
     </ClInclude>
-    <ClInclude Include="Teensy\IntervalTimer.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
     <ClInclude Include="Teensy\kinetis.h">
       <Filter>Teensy</Filter>
     </ClInclude>
@@ -210,9 +207,6 @@
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Teensy\HardwareSerial6.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\IntervalTimer.cpp">
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Teensy\math_helper.c">

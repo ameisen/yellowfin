@@ -98,7 +98,6 @@
     <ClInclude Include="Teensy\DMAChannel.h" />
     <ClInclude Include="Teensy\elapsedMillis.h" />
     <ClInclude Include="Teensy\HardwareSerial.h" />
-    <ClInclude Include="Teensy\IntervalTimer.h" />
     <ClInclude Include="Teensy\kinetis.h" />
     <ClInclude Include="Teensy\math_helper.h" />
     <ClInclude Include="Teensy\mk20dx128.h" />
@@ -139,7 +138,6 @@
     <ClCompile Include="Teensy\HardwareSerial4.cpp" />
     <ClCompile Include="Teensy\HardwareSerial5.cpp" />
     <ClCompile Include="Teensy\HardwareSerial6.cpp" />
-    <ClCompile Include="Teensy\IntervalTimer.cpp" />
     <ClCompile Include="Teensy\math_helper.c" />
     <ClCompile Include="Teensy\mk20dx128.c" />
     <ClCompile Include="Teensy\new.cpp" />
