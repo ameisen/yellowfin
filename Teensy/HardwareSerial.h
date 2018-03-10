@@ -129,6 +129,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#if ENABLE_SERIAL1 == 1
 void serial_begin(uint32_t divisor);
 void serial_format(uint32_t format);
 void serial_end(void);
@@ -149,7 +151,9 @@ void serial_print(const char *p);
 void serial_phex(uint32_t n);
 void serial_phex16(uint32_t n);
 void serial_phex32(uint32_t n);
+#endif
 
+#if ENABLE_SERIAL2 == 1
 void serial2_begin(uint32_t divisor);
 void serial2_format(uint32_t format);
 void serial2_end(void);
@@ -166,7 +170,9 @@ int serial2_available(void);
 int serial2_getchar(void);
 int serial2_peek(void);
 void serial2_clear(void);
+#endif
 
+#if ENABLE_SERIAL3 == 1
 void serial3_begin(uint32_t divisor);
 void serial3_format(uint32_t format);
 void serial3_end(void);
@@ -183,7 +189,9 @@ int serial3_available(void);
 int serial3_getchar(void);
 int serial3_peek(void);
 void serial3_clear(void);
+#endif
 
+#if ENABLE_SERIAL4 == 1
 void serial4_begin(uint32_t divisor);
 void serial4_format(uint32_t format);
 void serial4_end(void);
@@ -200,7 +208,9 @@ int serial4_available(void);
 int serial4_getchar(void);
 int serial4_peek(void);
 void serial4_clear(void);
+#endif
 
+#if ENABLE_SERIAL5 == 1
 void serial5_begin(uint32_t divisor);
 void serial5_format(uint32_t format);
 void serial5_end(void);
@@ -217,7 +227,9 @@ int serial5_available(void);
 int serial5_getchar(void);
 int serial5_peek(void);
 void serial5_clear(void);
+#endif
 
+#if ENABLE_SERIAL6 == 1
 void serial6_begin(uint32_t divisor);
 void serial6_format(uint32_t format);
 void serial6_end(void);
@@ -234,6 +246,7 @@ int serial6_available(void);
 int serial6_getchar(void);
 int serial6_peek(void);
 void serial6_clear(void);
+#endif
 
 #ifdef __cplusplus
 }
@@ -244,6 +257,7 @@ void serial6_clear(void);
 //
 #ifdef __cplusplus
 #include "Stream.h"
+#if ENABLE_SERIAL1 == 1
 class HardwareSerial : public Stream
 {
 public:
@@ -280,7 +294,9 @@ public:
 };
 extern HardwareSerial Serial1;
 extern void serialEvent1(void);
+#endif
 
+#if ENABLE_SERIAL2 == 1
 class HardwareSerial2 : public HardwareSerial
 {
 public:
@@ -317,7 +333,9 @@ public:
 };
 extern HardwareSerial2 Serial2;
 extern void serialEvent2(void);
+#endif
 
+#if ENABLE_SERIAL3 == 1
 class HardwareSerial3 : public HardwareSerial
 {
 public:
@@ -354,7 +372,9 @@ public:
 };
 extern HardwareSerial3 Serial3;
 extern void serialEvent3(void);
+#endif
 
+#if ENABLE_SERIAL4 == 1
 class HardwareSerial4 : public HardwareSerial
 {
 public:
@@ -391,7 +411,9 @@ public:
 };
 extern HardwareSerial4 Serial4;
 extern void serialEvent4(void);
+#endif
 
+#if ENABLE_SERIAL5 == 1
 class HardwareSerial5 : public HardwareSerial
 {
 public:
@@ -428,7 +450,9 @@ public:
 };
 extern HardwareSerial5 Serial5;
 extern void serialEvent5(void);
+#endif
 
+#if ENABLE_SERIAL6 == 1
 class HardwareSerial6 : public HardwareSerial
 {
 public:
@@ -472,9 +496,7 @@ public:
 };
 extern HardwareSerial6 Serial6;
 extern void serialEvent6(void);
-
-
-
+#endif
 
 #endif
 #endif

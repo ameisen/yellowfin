@@ -776,7 +776,6 @@ void ResetHandler(void)
 
 	// default all interrupts to medium priority level
   memcpy(_VectorsRam, _VectorsFlash, sizeof(_VectorsRam[0]) * (NVIC_NUM_INTERRUPTS + 1));
-	//for (i=0; i < NVIC_NUM_INTERRUPTS + 16; i++) _VectorsRam[i] = _VectorsFlash[i];
 	for (i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);
 	SCB_VTOR = (uint32_t)_VectorsRam;	// use vector table in RAM
 

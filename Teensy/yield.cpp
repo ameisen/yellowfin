@@ -41,17 +41,29 @@ void yield(void)
 	if (running) return; // TODO: does this need to be atomic?
 	running = 1;
 	if (Serial.available()) serialEvent();
+#if ENABLE_SERIAL1 == 1
 	if (Serial1.available()) serialEvent1();
+#endif
+#if ENABLE_SERIAL2 == 1
 	if (Serial2.available()) serialEvent2();
+#endif
+#if ENABLE_SERIAL3 == 1
 	if (Serial3.available()) serialEvent3();
+#endif
+#if ENABLE_SERIAL4 == 1
 #ifdef HAS_KINETISK_UART3
 	if (Serial4.available()) serialEvent4();
 #endif
+#endif
+#if ENABLE_SERIAL5 == 1
 #ifdef HAS_KINETISK_UART4
 	if (Serial5.available()) serialEvent5();
 #endif
+#endif
+#if ENABLE_SERIAL6 == 1
 #if defined(HAS_KINETISK_UART5) || defined (HAS_KINETISK_LPUART0)
 	if (Serial6.available()) serialEvent6();
+#endif
 #endif
 	running = 0;
 	EventResponder::runFromYield();

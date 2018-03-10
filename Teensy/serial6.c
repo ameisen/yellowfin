@@ -28,6 +28,8 @@
  * SOFTWARE.
  */
 
+#if ENABLE_SERIAL6 == 1
+
 #include "kinetis.h"
 #include "core_pins.h"
 #include "HardwareSerial.h"
@@ -370,3 +372,5 @@ void uart5_status_isr(void)
 }
 
 #endif // HAS_KINETISK_UART5
+
+#endif

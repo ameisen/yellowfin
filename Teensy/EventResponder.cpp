@@ -336,7 +336,7 @@ void MillisTimer::runFromTimer()
 extern "C" volatile uint32_t systick_millis_count;
 void systick_isr(void)
 {
-	systick_millis_count++;
+	++systick_millis_count;
 	MillisTimer::runFromTimer();
 }
 

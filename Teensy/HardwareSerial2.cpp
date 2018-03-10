@@ -28,9 +28,13 @@
  * SOFTWARE.
  */
 
+#if ENABLE_SERIAL2 == 1
+
 #include "HardwareSerial.h"
 
 HardwareSerial2 Serial2;
 
 void serialEvent2() __attribute__((weak));
 void serialEvent2() {}
+
+#endif

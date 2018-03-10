@@ -28,6 +28,8 @@
  * SOFTWARE.
  */
 
+#if ENABLE_SERIAL2 == 1
+
 #include "kinetis.h"
 #include "core_pins.h"
 #include "HardwareSerial.h"
@@ -599,4 +601,4 @@ void uart1_status_isr(void)
 	}
 }
 
-
+#endif

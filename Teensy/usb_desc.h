@@ -115,6 +115,8 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
 
 
 #if defined(USB_SERIAL)
+#define USB_BUFFER_SIZE 128
+#define USB_ACM_SIZE 16
   #define VENDOR_ID		0x16C0
   #define PRODUCT_ID		0x0483
   #define DEVICE_CLASS		2	// 2 = Communication Class

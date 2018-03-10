@@ -28,6 +28,8 @@
  * SOFTWARE.
  */
 
+#if ENABLE_SERIAL1 == 1
+
 #include "kinetis.h"
 #include "core_pins.h"
 #include "HardwareSerial.h"
@@ -650,3 +652,4 @@ void serial_phex32(uint32_t n)
 	serial_phex(n);
 }
 
+#endif
