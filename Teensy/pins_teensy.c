@@ -1183,14 +1183,13 @@ uint32_t micros(void)
 	return count * 1000 + current / (F_CPU / 1000000);
 }
 
-void delay(uint32_t ms)
+void delay(const uint32_t ms)
 {
   if (ms > 0)
   {
-    const uint32_t current = millis();
-    const uint32_t target = ms;
+    const uint32_t start = millis();
 
-    while ((millis() - current) < target)
+    while ((uint32_t)(millis() - start) < ms)
     {
       yield();
     }
