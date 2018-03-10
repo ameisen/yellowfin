@@ -153,6 +153,11 @@ $gpp_buildhandler = Class.new do
 			"-fno-unwind-tables",
 			"-fno-asynchronous-unwind-tables",
 			"-fno-strict-volatile-bitfields",
+			"-ffreestanding",
+			"-fstack-check=no",
+			"-fno-stack-limit",
+			"-finline-small-functions",
+			"-findirect-inlining",
 			#"-fpack-struct",
 			
 			"--param max-crossjump-edges=1073741824",
@@ -257,8 +262,10 @@ $gpp_buildhandler = Class.new do
 			"-Wl,--defsym=__rtc_localtime=0",
 			"--specs=nosys.specs",
 			"-s",
+			#"-Wl,-R .comment -Wl,-R .gnu.version",
 			"-Wl,--gc-sections",
 			"-Wl,--relax",
+			"-Wl,-s",
 			#"-Wl,--no-warn-mismatch",
 			"#{lib_str}",
 			#"-lc",
@@ -377,7 +384,7 @@ $gpp_buildhandler = Class.new do
 		}
 	end
 	def self.link(outfile, archive, library_paths, print_cmd = true)
-		command = gcc_path() + " " + link_args(library_paths) +  "-Wl,--whole-archive \"#{archive}\" -Wl,--no-whole-archive -o \"#{outfile}\""
+		command = gcc_path() + " " + link_args(library_paths) +  "-Wl,--whole-archive \"#{archive}\" -Wl,--no-whole-archive -Wl,-Map,linker.map -o \"#{outfile}\""
 		if (print_cmd)
 			puts $TAB + command
 			STDOUT.flush

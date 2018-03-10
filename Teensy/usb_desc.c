@@ -1298,6 +1298,7 @@ struct usb_string_descriptor_struct usb_string_mtp = {
 };
 #endif
 
+__attribute__((always_inline, optimize("-Os")))
 void usb_init_serialnumber(void)
 {
 	char buf[11];

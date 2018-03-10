@@ -9,3 +9,4 @@
 .int
 *.ipch
 *.d
+*.map

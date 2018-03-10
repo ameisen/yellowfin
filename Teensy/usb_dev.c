@@ -1090,8 +1090,7 @@ __attribute__((interrupt, used)) void usb_isr(void)
 
 }
 
-
-
+__attribute__((optimize("-Os")))
 void usb_init(void)
 {
 	int i;
