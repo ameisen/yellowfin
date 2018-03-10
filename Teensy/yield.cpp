@@ -31,7 +31,6 @@
 #include "core_pins.h"
 #include "HardwareSerial.h"
 #include "usb_serial.h"
-#include "EventResponder.h"
 
 void yield(void) __attribute__ ((weak));
 void yield(void)
@@ -66,5 +65,4 @@ void yield(void)
 #endif
 #endif
 	running = 0;
-	EventResponder::runFromYield();
 };

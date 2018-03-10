@@ -846,8 +846,6 @@ void _reboot_Teensyduino_(void)
 	__asm__ volatile("bkpt");
 }
 
-
-
 void usb_isr(void)
 {
 	uint8_t status, stat, t;

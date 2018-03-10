@@ -97,7 +97,6 @@
     <ClInclude Include="Teensy\core_pins.h" />
     <ClInclude Include="Teensy\DMAChannel.h" />
     <ClInclude Include="Teensy\elapsedMillis.h" />
-    <ClInclude Include="Teensy\EventResponder.h" />
     <ClInclude Include="Teensy\HardwareSerial.h" />
     <ClInclude Include="Teensy\IntervalTimer.h" />
     <ClInclude Include="Teensy\kinetis.h" />
@@ -135,7 +134,6 @@
     <ClCompile Include="Teensy\analog.c" />
     <ClCompile Include="Teensy\DMAChannel.cpp" />
     <ClCompile Include="Teensy\eeprom.c" />
-    <ClCompile Include="Teensy\EventResponder.cpp" />
     <ClCompile Include="Teensy\HardwareSerial1.cpp" />
     <ClCompile Include="Teensy\HardwareSerial2.cpp" />
     <ClCompile Include="Teensy\HardwareSerial3.cpp" />
@@ -158,6 +156,7 @@
     <ClCompile Include="Teensy\serial6_lpuart.c" />
     <ClCompile Include="Teensy\ser_print.c" />
     <ClCompile Include="Teensy\Stream.cpp" />
+    <ClCompile Include="Teensy\systick.cpp" />
     <ClCompile Include="Teensy\usb_desc.c" />
     <ClCompile Include="Teensy\usb_dev.c" />
     <ClCompile Include="Teensy\usb_inst.cpp" />

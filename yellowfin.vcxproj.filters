@@ -73,9 +73,6 @@
     <ClInclude Include="Teensy\elapsedMillis.h">
       <Filter>Teensy</Filter>
     </ClInclude>
-    <ClInclude Include="Teensy\EventResponder.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
     <ClInclude Include="Teensy\HardwareSerial.h">
       <Filter>Teensy</Filter>
     </ClInclude>
@@ -200,9 +197,6 @@
     <ClCompile Include="Teensy\eeprom.c">
       <Filter>Teensy</Filter>
     </ClCompile>
-    <ClCompile Include="Teensy\EventResponder.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
     <ClCompile Include="Teensy\HardwareSerial1.cpp">
       <Filter>Teensy</Filter>
     </ClCompile>
@@ -294,5 +288,8 @@
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Teensy\systick.cpp">
+      <Filter>Teensy</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

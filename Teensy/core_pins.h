@@ -2019,6 +2019,7 @@ static inline uint32_t millis(void)
 }
 
 uint32_t micros(void);
+uint32_t millis(void);
 
 static inline void delayMicroseconds(uint32_t) __attribute__((always_inline, unused));
 static inline void delayMicroseconds(uint32_t usec)

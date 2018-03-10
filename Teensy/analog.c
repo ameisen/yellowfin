@@ -32,6 +32,7 @@
 //#include "HardwareSerial.h"
 
 static uint8_t calibrating;
+#if 0
 static uint8_t analog_right_shift = 0;
 static uint8_t analog_config_bits = 10;
 static uint8_t analog_num_average = 4;
@@ -561,17 +562,4 @@ void analogWriteDAC1(int val)
 }
 #endif
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif
