@@ -118,9 +118,6 @@
     <ClInclude Include="Teensy\new.h">
       <Filter>Teensy</Filter>
     </ClInclude>
-    <ClInclude Include="Teensy\pgmspace.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
     <ClInclude Include="Teensy\pins_arduino.h">
       <Filter>Teensy</Filter>
     </ClInclude>
@@ -145,49 +142,19 @@
     <ClInclude Include="Teensy\Udp.h">
       <Filter>Teensy</Filter>
     </ClInclude>
-    <ClInclude Include="Teensy\usb_audio.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
     <ClInclude Include="Teensy\usb_desc.h">
       <Filter>Teensy</Filter>
     </ClInclude>
     <ClInclude Include="Teensy\usb_dev.h">
       <Filter>Teensy</Filter>
     </ClInclude>
-    <ClInclude Include="Teensy\usb_flightsim.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\usb_joystick.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\usb_keyboard.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
     <ClInclude Include="Teensy\usb_mem.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\usb_midi.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\usb_mouse.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\usb_mtp.h">
       <Filter>Teensy</Filter>
     </ClInclude>
     <ClInclude Include="Teensy\usb_names.h">
       <Filter>Teensy</Filter>
     </ClInclude>
-    <ClInclude Include="Teensy\usb_rawhid.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\usb_seremu.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
     <ClInclude Include="Teensy\usb_serial.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\usb_touch.h">
       <Filter>Teensy</Filter>
     </ClInclude>
     <ClInclude Include="Teensy\usb_undef.h">
@@ -365,52 +332,19 @@
     <ClCompile Include="Teensy\touch.c">
       <Filter>Teensy</Filter>
     </ClCompile>
-    <ClCompile Include="Teensy\usb_audio.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
     <ClCompile Include="Teensy\usb_desc.c">
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Teensy\usb_dev.c">
       <Filter>Teensy</Filter>
     </ClCompile>
-    <ClCompile Include="Teensy\usb_flightsim.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
     <ClCompile Include="Teensy\usb_inst.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\usb_joystick.c">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\usb_keyboard.c">
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Teensy\usb_mem.c">
       <Filter>Teensy</Filter>
     </ClCompile>
-    <ClCompile Include="Teensy\usb_midi.c">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\usb_mouse.c">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\usb_mtp.c">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\usb_rawhid.c">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\usb_seremu.c">
-      <Filter>Teensy</Filter>
-    </ClCompile>
     <ClCompile Include="Teensy\usb_serial.c">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\usb_touch.c">
-      <Filter>Teensy</Filter>
-    </ClCompile>
-    <ClCompile Include="Teensy\WMath.cpp">
       <Filter>Teensy</Filter>
     </ClCompile>
     <ClCompile Include="Teensy\WString.cpp">

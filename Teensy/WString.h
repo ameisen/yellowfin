@@ -54,7 +54,7 @@ class String
 {
 public:
 	// constructors
-	String(const char *cstr = (const char *)NULL);
+	String(const char *cstr = nullptr);
 	String(const __FlashStringHelper *pgmstr);
 	String(const String &str);
 	#if __cplusplus >= 201103L || defined(__GXX_EXPERIMENTAL_CXX0X__)

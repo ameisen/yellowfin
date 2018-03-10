@@ -73,4 +73,6 @@ using __builtin_va_list = void *;
 #define __UINT32_C(c) c ## UL
 #define __INT16_C(c) c
 
+#define __null ((void *)0)
+
 #endif

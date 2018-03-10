@@ -52,16 +52,6 @@
 
 #include "avr_emulation.h"
 #include "usb_serial.h"
-#include "usb_seremu.h"
-#include "usb_keyboard.h"
-#include "usb_mouse.h"
-#include "usb_joystick.h"
-#include "usb_midi.h"
-#include "usb_rawhid.h"
-#include "usb_flightsim.h"
-#include "usb_mtp.h"
-#include "usb_audio.h"
-#include "usb_touch.h"
 #include "usb_undef.h" // do not allow usb_desc.h stuff to leak to user programs
 
 #include "WCharacter.h"
@@ -78,13 +68,6 @@ unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout = 100000
 
 void tone(uint8_t pin, uint16_t frequency, uint32_t duration = 0);
 void noTone(uint8_t pin);
-
-// WMath prototypes
-int32_t random(void);
-uint32_t random(uint32_t howbig);
-int32_t random(int32_t howsmall, int32_t howbig);
-void randomSeed(uint32_t newseed);
-void srandom(unsigned int newseed);
 
 #include "pins_arduino.h"
 
