@@ -86,16 +86,10 @@
     <ClInclude Include="Teensy\Arduino.h" />
     <ClInclude Include="Teensy\arm_math.h" />
     <ClInclude Include="Teensy\avr\eeprom.h" />
-    <ClInclude Include="Teensy\avr\interrupt.h" />
-    <ClInclude Include="Teensy\avr\io.h" />
-    <ClInclude Include="Teensy\avr\pgmspace.h" />
-    <ClInclude Include="Teensy\avr\power.h" />
     <ClInclude Include="Teensy\avr\sleep.h" />
     <ClInclude Include="Teensy\avr\wdt.h" />
-    <ClInclude Include="Teensy\avr_emulation.h" />
     <ClInclude Include="Teensy\avr_functions.h" />
     <ClInclude Include="Teensy\binary.h" />
-    <ClInclude Include="Teensy\Client.h" />
     <ClInclude Include="Teensy\core_cm4.h" />
     <ClInclude Include="Teensy\core_cm4_simd.h" />
     <ClInclude Include="Teensy\core_cmInstr.h" />
@@ -113,7 +107,6 @@
     <ClInclude Include="Teensy\pins_arduino.h" />
     <ClInclude Include="Teensy\Print.h" />
     <ClInclude Include="Teensy\Printable.h" />
-    <ClInclude Include="Teensy\Server.h" />
     <ClInclude Include="Teensy\ser_print.h" />
     <ClInclude Include="Teensy\SPIFIFO.h" />
     <ClInclude Include="Teensy\Stream.h" />
@@ -140,7 +133,6 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Teensy\analog.c" />
-    <ClCompile Include="Teensy\avr_emulation.cpp" />
     <ClCompile Include="Teensy\DMAChannel.cpp" />
     <ClCompile Include="Teensy\eeprom.c" />
     <ClCompile Include="Teensy\EventResponder.cpp" />

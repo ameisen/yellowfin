@@ -46,16 +46,10 @@
     <ClInclude Include="Teensy\arm_math.h">
       <Filter>Teensy</Filter>
     </ClInclude>
-    <ClInclude Include="Teensy\avr_emulation.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
     <ClInclude Include="Teensy\avr_functions.h">
       <Filter>Teensy</Filter>
     </ClInclude>
     <ClInclude Include="Teensy\binary.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\Client.h">
       <Filter>Teensy</Filter>
     </ClInclude>
     <ClInclude Include="Teensy\core_cm4.h">
@@ -112,9 +106,6 @@
     <ClInclude Include="Teensy\ser_print.h">
       <Filter>Teensy</Filter>
     </ClInclude>
-    <ClInclude Include="Teensy\Server.h">
-      <Filter>Teensy</Filter>
-    </ClInclude>
     <ClInclude Include="Teensy\SPIFIFO.h">
       <Filter>Teensy</Filter>
     </ClInclude>
@@ -156,18 +147,6 @@
     </ClInclude>
     <ClInclude Include="Teensy\WString.h">
       <Filter>Teensy</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\avr\interrupt.h">
-      <Filter>Teensy\avr</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\avr\io.h">
-      <Filter>Teensy\avr</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\avr\pgmspace.h">
-      <Filter>Teensy\avr</Filter>
-    </ClInclude>
-    <ClInclude Include="Teensy\avr\power.h">
-      <Filter>Teensy\avr</Filter>
     </ClInclude>
     <ClInclude Include="Teensy\avr\sleep.h">
       <Filter>Teensy\avr</Filter>
@@ -215,9 +194,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Teensy\avr_emulation.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
     <ClCompile Include="Teensy\DMAChannel.cpp">
       <Filter>Teensy</Filter>
     </ClCompile>

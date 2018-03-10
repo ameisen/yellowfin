@@ -35,12 +35,6 @@
 #include <string.h>
 #include <math.h>
 
-// some libraries and sketches depend on this
-// AVR stuff, assuming Arduino.h or WProgram.h
-// automatically includes it...
-#include <avr/pgmspace.h>
-#include <avr/interrupt.h>
-
 #include "avr_functions.h"
 #include "wiring.h"
 #include "HardwareSerial.h"
@@ -50,7 +44,6 @@
 
 #ifdef __cplusplus
 
-#include "avr_emulation.h"
 #include "usb_serial.h"
 #include "usb_undef.h" // do not allow usb_desc.h stuff to leak to user programs
 
