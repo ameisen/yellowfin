@@ -88,8 +88,8 @@ SECTIONS
 		*(.data*)
 		. = ALIGN(4);
 		_edata = .; 
-		_datasize = _edata - _sdata;
 	} > RAM
+	_datasize = SIZEOF(.data);
 
 	.noinit (NOLOAD) : {
 		*(.noinit*)
@@ -107,6 +107,7 @@ SECTIONS
 		__bss_end = .;
 		__bss_end__ = .;
 	} > RAM
+	_bsssize = SIZEOF(.bss);
 
 	_estack = ORIGIN(RAM) + LENGTH(RAM);
 }

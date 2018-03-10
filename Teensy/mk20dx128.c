@@ -34,6 +34,9 @@
 #include <errno.h>
 #include <string.h>
 
+#ifndef __assume
+# define __assume(c) if (!(c)) { __builtin_unreachable; }
+#endif
 
 // Flash Security Setting. On Teensy 3.2, you can lock the MK20 chip to prevent
 // anyone from reading your code.  You CAN still reprogram your Teensy while
@@ -53,15 +56,15 @@
 #define FOPT 0xF9
 
 
-extern const unsigned long _stext;
-extern const unsigned long _etext;
-extern const unsigned long _sdata;
-extern const unsigned long _edata;
-extern const unsigned long _datasize;
-extern const unsigned long _sbss;
-extern const unsigned long _ebss;
-extern const unsigned long _bsssize;
-extern const unsigned long _estack;
+extern uint32_t _stext[];
+extern uint32_t _etext[];
+extern uint32_t _sdata[];
+extern uint32_t _edata[];
+extern const uint32_t _datasize;
+extern uint32_t _sbss[];
+extern uint32_t _ebss[];
+extern const uint32_t _bsssize;
+extern uint32_t _estack[];
 //extern void __init_array_start(void);
 //extern void __init_array_end(void);
 
@@ -683,7 +686,7 @@ void startup_early_hook(void)		__attribute__ ((weak, alias("startup_default_earl
 void startup_late_hook(void)		__attribute__ ((weak, alias("startup_default_late_hook")));
 
 
-#if defined(__PURE_CODE__) || !defined(__OPTIMIZE__) || defined(__clang__)
+#if defined(__PURE_CODE__) || !defined(__OPTIMIZE__) || defined(__clang__) || 1
 // cases known to compile too large for 0-0x400 memory region
 __attribute__ ((optimize("-Os"), used, noreturn))
 #else
@@ -764,18 +767,31 @@ void ResetHandler(void)
 	SMC_PMPROT = SMC_PMPROT_AVLP | SMC_PMPROT_ALLS | SMC_PMPROT_AVLLS;
 #endif
     
-	// TODO: do this while the PLL is waiting to lock....
 
-  // TODO they use & to get the address... but shouldn't it be an integer that contains the address
-  // rather than be the actual destination? That seems wrong.
-  memcpy((uint32_t * __restrict)&_sdata, (const uint32_t * __restrict)&_etext, _datasize);
-  memset((uint32_t * __restrict)&_sbss, 0, _bsssize);
-	//while (dest < &_edata) *dest++ = *src++;
-	//dest = &_sbss;
-	//while (dest < &_ebss) *dest++ = 0;
+	// TODO: do this while the PLL is waiting to lock....
+  {
+    const uint32_t * const __restrict src = _etext;
+    uint32_t * const __restrict dest = _sdata;
+    const uint32_t size = (uint32_t)&_datasize;
+
+    __assume(size & 0b11 == 0);
+    __assume((uintptr_t)src & 0b11 == 0);
+    __assume((uintptr_t)dest & 0b11 == 0);
+
+    memcpy(dest, src, size);
+  }
+  {
+    uint32_t * const __restrict dest = _sbss;
+    const uint32_t size = (uint32_t)&_bsssize;
+
+    __assume(size & 0b11 == 0);
+    __assume((uintptr_t)dest & 0b11 == 0);
+
+    memset(dest, 0, size);
+  }
 
 	// default all interrupts to medium priority level
-  memcpy(_VectorsRam, _VectorsFlash, sizeof(_VectorsRam[0]) * (NVIC_NUM_INTERRUPTS + 1));
+  memcpy(_VectorsRam, _VectorsFlash, sizeof(_VectorsRam[0]) * (NVIC_NUM_INTERRUPTS + 16));
 	for (i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);
 	SCB_VTOR = (uint32_t)_VectorsRam;	// use vector table in RAM
 
