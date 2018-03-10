@@ -224,9 +224,6 @@
     <ClCompile Include="Teensy\IntervalTimer.cpp">
       <Filter>Teensy</Filter>
     </ClCompile>
-    <ClCompile Include="Teensy\main.cpp">
-      <Filter>Teensy</Filter>
-    </ClCompile>
     <ClCompile Include="Teensy\math_helper.c">
       <Filter>Teensy</Filter>
     </ClCompile>

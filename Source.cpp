@@ -190,7 +190,8 @@ void endpulse_isr()
 
 extern "C" void pit0_isr(void)		__attribute__((alias("checkpulse_isr")));
 
-__attribute__((used))
+extern "C"
+__attribute__((used, noreturn))
 void lmain()
 {
   enable_output_pin<pin::LED>();

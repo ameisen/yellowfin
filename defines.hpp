@@ -16,12 +16,21 @@ using int16 = int16_t;
 using int32 = int32_t;
 using int64 = int64_t;
 
-#define __unreachable __builtin_unreachable()
-#define __forceinline __attribute__((always_inline))
-#define __assume(c) { if (!(c)) { __unreachable; } }
-#define __likely(c) (__builtin_expect(c, true))
-#define __unlikely(c) (__builtin_expect(c, false))
-#define __flatten __attribute__((flatten))
+#if __INTELLISENSE__
+# define __unreachable
+# define __forceinline
+# define __assume(c)
+# define __likely(c) (c)
+# define __unlikely(c) (c)
+# define __flatten
+#else
+# define __unreachable __builtin_unreachable()
+# define __forceinline __attribute__((always_inline))
+# define __assume(c) { if (!(c)) { __unreachable; } }
+# define __likely(c) (__builtin_expect(c, true))
+# define __unlikely(c) (__builtin_expect(c, false))
+# define __flatten __attribute__((flatten))
+#endif
 
 namespace Tuna
 {

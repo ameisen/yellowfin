@@ -88,6 +88,7 @@ SECTIONS
 		*(.data*)
 		. = ALIGN(4);
 		_edata = .; 
+		_datasize = _edata - _sdata;
 	} > RAM
 
 	.noinit (NOLOAD) : {
@@ -102,6 +103,7 @@ SECTIONS
 		*(COMMON)
 		. = ALIGN(4);
 		_ebss = .;
+		_bsssize = _ebss - _sbss;
 		__bss_end = .;
 		__bss_end__ = .;
 	} > RAM

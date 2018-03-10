@@ -1,5 +1,7 @@
 #pragma once
 
+#include <algorithm>
+
 namespace motion
 {
   template <motion_type MT>
@@ -104,7 +106,9 @@ namespace motion
           // t = (sqrt(2as+a0^2) - a0) / a
           // whichever is greater.
           
-          const float expression = sqrt((2.0f * ramp_accelerations[1] * distance) + square(start_velocity));
+          const float in_value = (2.0f * ramp_accelerations[1] * distance) + square(start_velocity);
+          __assume(in_value >= 0.0f);
+          const float expression = sqrtf(in_value);
           const float time = std::max(
             -((expression + start_velocity) / ramp_accelerations[1]),
              ((expression - start_velocity) / ramp_accelerations[1])
@@ -115,7 +119,9 @@ namespace motion
         else if (velocity_diffs[1] == 0.0f)
         {
           // Up Ramp Only
-          const float expression = sqrt((2.0f * ramp_accelerations[0] * distance) + square(start_velocity));
+          const float in_value = (2.0f * ramp_accelerations[0] * distance) + square(start_velocity);
+          __assume(in_value >= 0.0f);
+          const float expression = sqrtf(in_value);
           const float time = std::max(
             -((expression + start_velocity) / ramp_accelerations[0]),
             ((expression - start_velocity) / ramp_accelerations[0])

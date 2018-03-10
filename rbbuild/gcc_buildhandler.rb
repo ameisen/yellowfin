@@ -76,9 +76,9 @@ $gpp_buildhandler = Class.new do
 			"-mcpu=cortex-m4",
 			"-mfpu=fpv4-sp-d16",
 			is_c(source) ? "" : "-fno-rtti",
-			#"-march=armv7e-m",								# ARM Cortex-M
+			"-march=armv7e-m",								# ARM Cortex-M
 			"-mthumb",
-			#"-mtune=cortex-m4",								# Cortex-M3
+			"-mtune=cortex-m4",								# Cortex-M3
 			#"-mfp16-format=alternative",
 			$TINY_CODE ? "-Os" : "-O3",						# Choose optimization level.
 			#$TINY_CODE ? "-fno-tree-ch" : "",				# Disabling ftree-ch makes code smaller. Not convinced that it's _better_. TODO Validate.
@@ -217,7 +217,11 @@ $gpp_buildhandler = Class.new do
 			"-I./Teensy",
 			#"-nostdlib",
 			"-MMD -D__MK66FX1M0__=1 -DTEENSYDUINO=140 -DARDUINO=10804 -DF_CPU=240000000 -DUSB_SERIAL=1 -DLAYOUT_US_ENGLISH=1",
-			"-mpure-code -D__PURE_CODE__",
+			#"-mpure-code -D__PURE_CODE__",
+			"-mfp16-format=alternative",
+			"-D__FPU_PRESENT=1",
+			"-munaligned-access",
+			#(source.include? "mk20dx128.c") ? "-mslow-flash-data" : "", # don't generate this for the function that gets jammed in the loader.
 		]
 
 		# -fvisibility=[default|internal|hidden|protected]

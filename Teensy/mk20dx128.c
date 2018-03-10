@@ -32,6 +32,7 @@
 #include "core_pins.h" // testing only
 #include "ser_print.h" // testing only
 #include <errno.h>
+#include <string.h>
 
 
 // Flash Security Setting. On Teensy 3.2, you can lock the MK20 chip to prevent
@@ -52,19 +53,21 @@
 #define FOPT 0xF9
 
 
-extern unsigned long _stext;
-extern unsigned long _etext;
-extern unsigned long _sdata;
-extern unsigned long _edata;
-extern unsigned long _sbss;
-extern unsigned long _ebss;
-extern unsigned long _estack;
+extern const unsigned long _stext;
+extern const unsigned long _etext;
+extern const unsigned long _sdata;
+extern const unsigned long _edata;
+extern const unsigned long _datasize;
+extern const unsigned long _sbss;
+extern const unsigned long _ebss;
+extern const unsigned long _bsssize;
+extern const unsigned long _estack;
 //extern void __init_array_start(void);
 //extern void __init_array_end(void);
 
 
 
-extern int main (void);
+void lmain(void);
 void ResetHandler(void);
 void _init_Teensyduino_internal_(void) __attribute__((noinline));
 void __libc_init_array(void);
@@ -682,15 +685,13 @@ void startup_late_hook(void)		__attribute__ ((weak, alias("startup_default_late_
 
 #if defined(__PURE_CODE__) || !defined(__OPTIMIZE__) || defined(__clang__)
 // cases known to compile too large for 0-0x400 memory region
-__attribute__ ((optimize("-Os")))
+__attribute__ ((optimize("-Os"), used, noreturn))
 #else
 // hopefully all others fit into startup section (below 0x400)
-__attribute__ ((section(".startup"),optimize("-Os"), used))
+__attribute__ ((section(".startup"),optimize("-Os"), used, noreturn))
 #endif
 void ResetHandler(void)
 {
-	uint32_t *src = &_etext;
-	uint32_t *dest = &_sdata;
 	unsigned int i;
 #if F_CPU <= 2000000
 	volatile int n;
@@ -764,12 +765,18 @@ void ResetHandler(void)
 #endif
     
 	// TODO: do this while the PLL is waiting to lock....
-	while (dest < &_edata) *dest++ = *src++;
-	dest = &_sbss;
-	while (dest < &_ebss) *dest++ = 0;
+
+  // TODO they use & to get the address... but shouldn't it be an integer that contains the address
+  // rather than be the actual destination? That seems wrong.
+  memcpy((uint32_t * __restrict)&_sdata, (const uint32_t * __restrict)&_etext, _datasize);
+  memset((uint32_t * __restrict)&_sbss, 0, _bsssize);
+	//while (dest < &_edata) *dest++ = *src++;
+	//dest = &_sbss;
+	//while (dest < &_ebss) *dest++ = 0;
 
 	// default all interrupts to medium priority level
-	for (i=0; i < NVIC_NUM_INTERRUPTS + 16; i++) _VectorsRam[i] = _VectorsFlash[i];
+  memcpy(_VectorsRam, _VectorsFlash, sizeof(_VectorsRam[0]) * (NVIC_NUM_INTERRUPTS + 1));
+	//for (i=0; i < NVIC_NUM_INTERRUPTS + 16; i++) _VectorsRam[i] = _VectorsFlash[i];
 	for (i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);
 	SCB_VTOR = (uint32_t)_VectorsRam;	// use vector table in RAM
 
@@ -1127,7 +1134,7 @@ void ResetHandler(void)
 	__libc_init_array();
 
 	startup_late_hook();
-	main();
+	lmain();
 	while (1) ;
 }
 

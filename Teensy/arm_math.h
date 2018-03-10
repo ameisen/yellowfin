@@ -256,19 +256,13 @@
 #ifndef _ARM_MATH_H
 #define _ARM_MATH_H
 
-// Teensy 3.0
+#define ARM_MATH_CM4 1
 #include <stdint.h>
 #define __ASM		__asm
 #define __INLINE	inline
 #define __STATIC_INLINE	static inline
-#define __CORTEX_M	4
-#define __FPU_USED	0
-#define ARM_MATH_CM4
-#include "core_cmInstr.h"
-#include "core_cm4_simd.h"
 
-
-#if 0
+#if 1
 // generic for any board...
 #define __CMSIS_GENERIC         /* disable NVIC and Systick functions */
 #if defined (ARM_MATH_CM4)
@@ -283,6 +277,9 @@
 #endif
 #undef  __CMSIS_GENERIC         /* enable NVIC and Systick functions */
 #endif
+
+#include "core_cmInstr.h"
+#include "core_cm4_simd.h"
 
 #include "string.h"
 #include "math.h"
