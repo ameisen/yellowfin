@@ -5718,10 +5718,53 @@ static inline uint32_t cas_u32(volatile uint32_t * __restrict addr, uint32_t exp
 
   do {
     if (__unlikely(atomic_LL(addr) != expected))
+    {
       return 1;
-  } while (__unlikely((ret = atomic_SC(addr, store))));
-  __assume(ret == 0 || ret == 1);
-  return ret;
+    }
+    ret = atomic_SC(addr, store);
+    __assume(ret == 0 || ret == 1);
+  } while (__unlikely(ret));
+  return 0;
+}
+
+static inline uint32_t case_u32(volatile uint32_t * __restrict addr, uint32_t * __restrict expected, uint32_t store)
+{
+  __assume(addr != NULL);
+
+  uint32_t ret;
+
+  do {
+    if (__unlikely((ret = atomic_LL(addr)) != *expected))
+    {
+      *expected = ret;
+      return 1;
+    }
+    ret = atomic_SC(addr, store);
+    __assume(ret == 0 || ret == 1);
+  } while (__unlikely(ret));
+  return 0;
+}
+
+static inline void atomic_or_u32(volatile uint32_t * __restrict addr, uint32_t operand)
+{
+  __assume(addr != NULL);
+
+  uint32_t ret;
+
+  uint32_t expected = *addr;
+  uint32_t store;
+
+  do {
+    uint32_t loaded;
+    while (__unlikely((loaded = atomic_LL(addr)) != expected))
+    {
+      expected = loaded;
+    }
+    store = loaded | operand;
+    ret = atomic_SC(addr, store);
+    __assume(ret == 0 || ret == 1);
+  } while (__unlikely(ret));
+  return;
 }
 
 static inline void __enable_irqn(uint32_t irq)

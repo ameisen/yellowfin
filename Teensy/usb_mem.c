@@ -38,7 +38,7 @@
 __attribute__ ((section(".usbbuffers"), used))
 unsigned char usb_buffer_memory[NUM_USB_BUFFERS * sizeof(usb_packet_t)];
 
-static uint32_t usb_buffer_available = 0xFFFFFFFF;
+static volatile uint32_t usb_buffer_available = 0xFFFFFFFF;
 
 // use bitmask and CLZ instruction to implement fast free list
 // http://www.archivum.info/gnu.gcc.help/2006-08/00148/Re-GCC-Inline-Assembly.html
@@ -50,6 +50,8 @@ usb_packet_t * usb_malloc(void)
 	unsigned int n, avail;
 	uint8_t *p;
 
+  // switch to atomic ops instead of IRQ disabling
+#if 0
 	__disable_irq();
 	avail = usb_buffer_available;
 	n = __builtin_clz(avail); // clz = count leading zeros
@@ -57,12 +59,27 @@ usb_packet_t * usb_malloc(void)
 		__enable_irq();
 		return NULL;
 	}
-	//serial_print("malloc:");
-	//serial_phex(n);
-	//serial_print("\n");
 
 	usb_buffer_available = avail & ~(0x80000000 >> n);
 	__enable_irq();
+#else
+  // TODO this might be written better without using a CAS abstraction.
+  uint32_t expected;
+  avail = usb_buffer_available;
+  expected = avail;
+
+  do
+  {
+    n = __builtin_clz(avail);
+    if (__unlikely(n >= NUM_USB_BUFFERS))
+    {
+      return NULL;
+    }
+
+    avail = expected & ~(0x80000000 >> n);
+  } while (case_u32(&usb_buffer_available, &expected, avail));
+#endif
+
 	p = usb_buffer_memory + (n * sizeof(usb_packet_t));
 	//serial_print("malloc:");
 	//serial_phex32((int)p);
@@ -97,9 +114,14 @@ void usb_free(usb_packet_t *p)
 	}
 
 	mask = (0x80000000 >> n);
+  // Switch to using an atomic operation.
+#if 0
 	__disable_irq();
 	usb_buffer_available |= mask;
 	__enable_irq();
+#else
+  atomic_or_u32(&usb_buffer_available, mask);
+#endif
 
 	//serial_print("free:");
 	//serial_phex32((int)p);
