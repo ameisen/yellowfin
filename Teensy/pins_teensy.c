@@ -140,7 +140,7 @@ const struct digital_pin_bitband_and_config_table_struct digital_pin_to_info_PGM
 
 #endif
 
-static void dummy_isr() {};
+static __attribute__((interrupt)) void dummy_isr() {};
 
 typedef void (*voidFuncPtr)(void);
 #if defined(KINETISK)
@@ -272,7 +272,7 @@ typedef void (*voidFuncPtr)(void);
 // Using CTZ instead of CLZ is faster, since it allows more efficient bit
 // clearing and fast indexing into the pin ISR table.
 #define PORT_ISR_FUNCTION_CLZ(port_name) \
-	static void port_ ## port_name ## _isr(void) {            \
+	static __attribute__((interrupt)) void port_ ## port_name ## _isr(void) {            \
 		uint32_t isfr = PORT ## port_name ##_ISFR;            \
 		PORT ## port_name ##_ISFR = isfr;                     \
 		voidFuncPtr* isr_table = isr_table_port ## port_name; \

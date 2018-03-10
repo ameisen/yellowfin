@@ -111,23 +111,23 @@ void IntervalTimer::end() {
 //	//funct_table[0]();
 //}
 
-void pit1_isr() {
+__attribute__((interrupt)) void pit1_isr() {
 	PIT_TFLG1 = 1;
 	//funct_table[1]();
 }
 
-void pit2_isr() {
+__attribute__((interrupt)) void pit2_isr() {
 	PIT_TFLG2 = 1;
 	//funct_table[2]();
 }
 
-void pit3_isr() {
+__attribute__((interrupt)) void pit3_isr() {
 	PIT_TFLG3 = 1;
 	//funct_table[3]();
 }
 
 #elif defined(KINETISL)
-void pit_isr() {
+__attribute__((interrupt)) void pit_isr() {
 	if (PIT_TFLG0) {
 		PIT_TFLG0 = 1;
 		funct_table[0]();

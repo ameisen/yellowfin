@@ -325,7 +325,7 @@ void serial5_clear(void)
 //   LIN break detect		    UART_S2_LBKDIF
 //   RxD pin active edge	    UART_S2_RXEDGIF
 
-void uart4_status_isr(void)
+__attribute__((interrupt)) void uart4_status_isr(void)
 {
 	uint32_t head, tail, n;
 	uint8_t c;

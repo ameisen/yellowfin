@@ -76,7 +76,7 @@ void _init_Teensyduino_internal_(void) __attribute__((noinline));
 void __libc_init_array(void);
 
 
-void fault_isr(void)
+__attribute__((interrupt)) void fault_isr(void)
 {
 #if 0
 	uint32_t addr;
@@ -138,7 +138,7 @@ void fault_isr(void)
 	}
 }
 
-void unused_isr(void)
+__attribute__((interrupt)) void unused_isr(void)
 {
 	fault_isr();
 }
@@ -240,7 +240,7 @@ void pit1_isr(void)		__attribute__ ((weak, alias("unused_isr")));
 void pit2_isr(void)		__attribute__ ((weak, alias("unused_isr")));
 void pit3_isr(void)		__attribute__ ((weak, alias("unused_isr")));
 void pdb_isr(void)		__attribute__ ((weak, alias("unused_isr")));
-void usb_isr(void)		__attribute__ ((weak, alias("unused_isr")));
+//void usb_isr(void)		__attribute__ ((weak, alias("unused_isr")));
 void usb_charge_isr(void)	__attribute__ ((weak, alias("unused_isr")));
 void usbhs_isr(void)		__attribute__ ((weak, alias("unused_isr")));
 void usbhs_phy_isr(void)	__attribute__ ((weak, alias("unused_isr")));
@@ -271,7 +271,7 @@ __attribute__ ((section(".dmabuffers"), used, aligned(512)))
 void (* _VectorsRam[NVIC_NUM_INTERRUPTS+16])(void);
 
 __attribute__ ((section(".vectors"), used))
-void (* const _VectorsFlash[NVIC_NUM_INTERRUPTS+16])(void) =
+void (__attribute__((interrupt)) * const _VectorsFlash[NVIC_NUM_INTERRUPTS+16])(void) =
 {
 	(void (*)(void))((unsigned long)&_estack),	//  0 ARM: Initial Stack Pointer
 	ResetHandler,					//  1 ARM: Initial Program Counter

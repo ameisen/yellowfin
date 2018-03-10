@@ -145,7 +145,7 @@ void set_new_motion(float distance, float velocity)
   toggle_pulse_isr<true>();
 }
 
-extern "C" void checkpulse_isr()
+extern "C" __attribute__((interrupt)) void checkpulse_isr()
 {
   if (total_steps == motion_data.distance)
   {
@@ -173,7 +173,7 @@ extern "C" void checkpulse_isr()
   PIT_TFLG0 = 1;
 }
 
-void endpulse_isr()
+__attribute__((interrupt)) void endpulse_isr()
 {
   stepper_pin_state = false;
 
