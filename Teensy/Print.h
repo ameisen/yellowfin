@@ -54,6 +54,7 @@ class __FlashStringHelper;
 class Print
 {
   public:
+  // virtual ~Print() { __builtin_unreachable; }
 	constexpr Print() : write_error(0) {}
 	virtual size_t write(uint8_t b) = 0;
 	size_t write(const char *str)			{ return write((const uint8_t *)str, strlen(str)); }

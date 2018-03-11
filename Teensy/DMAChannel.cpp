@@ -168,8 +168,8 @@ void DMAChannel::begin(bool force_initialization)
 	CFG = (CFG_t *)(0x40008100 + ch * 16);
 	CFG->DSR_BCR = DMA_DSR_BCR_DONE;
 	CFG->DCR = DMA_DCR_CS;
-	CFG->SAR = NULL;
-	CFG->DAR = NULL;
+	CFG->SAR = nullptr;
+	CFG->DAR = nullptr;
 }
 
 void DMAChannel::release(void)

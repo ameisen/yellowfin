@@ -10,6 +10,18 @@
 
 #include <new>
 
+// Teensy 3.6
+// NXP MK66FX1M0VMD18
+// 1024 KiB Program Flash
+// non-volatile flash memory for executable code
+//  0x0000'0000 - 0x000F'FFFF
+// 256 KiB FlexNVM
+// non-volatile flash memory for executable code, data storage, or EEPROM
+//  0x1000'0000 - 0x1003'FFFF
+// 4 KiB FlexRAM
+// volatile RAM that is high speed
+//  0x1400'0000 - 0x1400'0FFF
+
 static constexpr const auto MT = motion::motion_type::floating_point;
 
 template <bool state>

@@ -28,22 +28,28 @@
  * SOFTWARE.
  */
 
+ /* --fix-stm32l4xx-629360 */
+
 MEMORY
 {
 	FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 1024K
-	RAM  (rwx) : ORIGIN = 0x1FFF0000, LENGTH = 256K
+	SRAM  (rwx) : ORIGIN = 0x1FFF0000, LENGTH = 256K
+	FlexRAM (rw) : ORIGIN = 0x14000000, LENGTH = 4K
 }
 
+/* REGION_ALIAS */
 
 SECTIONS
 {
 	.text : {
-		. = 0;
+		. = ORIGIN(FLASH);
 		KEEP(*(.vectors))
 		*(.startup*)
 		/* TODO: does linker detect startup overflow onto flashconfig? */
 		. = 0x400;
 		KEEP(*(.flashconfig*))
+		*(.glue_7t*)
+		*(.glue_7*)
 		*(.text*)
 		*(.rodata*)
 		. = ALIGN(4);
@@ -66,34 +72,36 @@ SECTIONS
 	_etext = .;
 
 	.usbdescriptortable (NOLOAD) : {
-		/* . = ORIGIN(RAM); */
+		/* . = ORIGIN(SRAM); */
 		. = ALIGN(512);
 		*(.usbdescriptortable*)
-	} > RAM
+	} > SRAM
 
 	.dmabuffers (NOLOAD) : {
 		. = ALIGN(4);
 		*(.dmabuffers*)
-	} > RAM
+	} > SRAM
 
 	.usbbuffers (NOLOAD) : {
 		. = ALIGN(4);
 		*(.usbbuffers*)
-	} > RAM
+	} > SRAM
 
+	/* Is there a way to sanely handle the 64KiB / 192KiB break? */
 	.data : AT (_etext) {
 		. = ALIGN(4);
-		_sdata = .; 
+		_sdata = .;
+		*(.flexnvm*)
 		*(.fastrun*)
 		*(.data*)
 		. = ALIGN(4);
 		_edata = .; 
-	} > RAM
+	} > SRAM
 	_datasize = SIZEOF(.data);
 
 	.noinit (NOLOAD) : {
 		*(.noinit*)
-	} > RAM
+	} > SRAM
 
 	.bss : {
 		. = ALIGN(4);
@@ -106,10 +114,25 @@ SECTIONS
 		_bsssize = _ebss - _sbss;
 		__bss_end = .;
 		__bss_end__ = .;
-	} > RAM
+	} > SRAM
 	_bsssize = SIZEOF(.bss);
 
-	_estack = ORIGIN(RAM) + LENGTH(RAM);
+	/* TODO add ASSERT(c, m) to validate enough space is left for stack */
+	_estack = ORIGIN(SRAM) + LENGTH(SRAM);
+
+	.flex (NOLOAD) : {
+		. = ORIGIN(FlexRAM);
+		*(.flexram*)
+	} > FlexRAM
+
+	/DISCARD/ : {
+		*(.ARM.attributes*)
+		*(.vfp11_veneer*)
+		*(.v4_bx*)
+		*(*.iplt*)
+		*(*.fini*)
+		/**(*.eh_*)*/
+	}
 }
 
 

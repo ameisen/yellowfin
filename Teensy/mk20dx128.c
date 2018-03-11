@@ -38,6 +38,12 @@
 # define __assume(c) if (!(c)) { __builtin_unreachable; }
 #endif
 
+ // TODO move this to a common CPU header.
+ // We were extracting it from the linker, but it makes more sense to hard-code it
+ // per CPU as it doesn't change. No reason to require an object to get the address of.
+#define _stackptr (0x1FFF0000 + 0x40000)
+
+
 // Flash Security Setting. On Teensy 3.2, you can lock the MK20 chip to prevent
 // anyone from reading your code.  You CAN still reprogram your Teensy while
 // security is set, but the bootloader will be unable to respond to auto-reboot
@@ -60,11 +66,10 @@ extern uint32_t _stext[];
 extern uint32_t _etext[];
 extern uint32_t _sdata[];
 extern uint32_t _edata[];
-extern const uint32_t _datasize;
 extern uint32_t _sbss[];
 extern uint32_t _ebss[];
-extern const uint32_t _bsssize;
-extern uint32_t _estack[];
+extern char _datasize;
+extern char _bsssize;
 //extern void __init_array_start(void);
 //extern void __init_array_end(void);
 
@@ -273,7 +278,7 @@ void (* _VectorsRam[NVIC_NUM_INTERRUPTS+16])(void);
 __attribute__ ((section(".vectors"), used))
 void (__attribute__((interrupt)) * const _VectorsFlash[NVIC_NUM_INTERRUPTS+16])(void) =
 {
-	(void (*)(void))((unsigned long)&_estack),	//  0 ARM: Initial Stack Pointer
+	(void (*)(void))_stackptr,	//  0 ARM: Initial Stack Pointer
 	ResetHandler,					//  1 ARM: Initial Program Counter
 	nmi_isr,					//  2 ARM: Non-maskable Interrupt (NMI)
 	hard_fault_isr,					//  3 ARM: Hard Fault
@@ -778,6 +783,7 @@ void ResetHandler(void)
     const uint32_t * const __restrict src = _etext;
     uint32_t * const __restrict dest = _sdata;
     const uint32_t size = (uint32_t)&_datasize;
+    __assume(size != 0);
 
     __assume(size & 0b11 == 0);
     __assume((uintptr_t)src & 0b11 == 0);
@@ -788,6 +794,7 @@ void ResetHandler(void)
   {
     uint32_t * const __restrict dest = _sbss;
     const uint32_t size = (uint32_t)&_bsssize;
+    __assume(size != 0);
 
     __assume(size & 0b11 == 0);
     __assume((uintptr_t)dest & 0b11 == 0);

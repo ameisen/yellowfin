@@ -377,7 +377,7 @@ public:
 protected:
 	// users should not be able to create instances of DMABaseClass, which
 	// require the inheriting class to initialize the TCD pointer.
-	DMABaseClass() {}
+  DMABaseClass() = default;
 
 	static inline void copy_tcd(TCD_t *dst, const TCD_t *src) {
 		const uint32_t *p = (const uint32_t *)src;
@@ -887,8 +887,8 @@ private:
 class DMASetting final : public DMABaseClass {
 public:
 	DMASetting() {
-		cfgdata.SAR = NULL;
-		cfgdata.DAR = NULL;
+		cfgdata.SAR = nullptr;
+		cfgdata.DAR = nullptr;
 		cfgdata.DSR_BCR = 0;
 		cfgdata.DCR = DMA_DCR_CS;
 		CFG = &cfgdata;

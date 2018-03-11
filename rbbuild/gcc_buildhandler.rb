@@ -70,8 +70,15 @@ $gpp_buildhandler = Class.new do
 			is_c(source) ? "" : "-fno-enforce-eh-specs",
 			is_c(source) ? "" : "-fno-use-cxa-get-exception-ptr",
 			is_c(source) ? "" : "-felide-constructors",
+			is_c(source) ? "" : "-fabi-version=11",
+			is_c(source) ? "" : "-fconcepts",
+			is_c(source) ? "" : "-Wsized-deallocation",
+			is_c(source) ? "" : "-fstrict-enums",
+			"-mabi=aapcs",
 			"-fdelete-null-pointer-checks",
 			"-Wno-deprecated",								# 
+			#is_c(source) ? "" : "-Weffc++",
+			# -Wsign-promo
 			"-mfloat-abi=hard",
 			"-g0",											# Disable debugging information.
 			"-mcpu=cortex-m4",
@@ -83,6 +90,7 @@ $gpp_buildhandler = Class.new do
 			#"-mfp16-format=alternative",
 			$TINY_CODE ? "-Os" : "-O3",						# Choose optimization level.
 			#$TINY_CODE ? "-fno-tree-ch" : "",				# Disabling ftree-ch makes code smaller. Not convinced that it's _better_. TODO Validate.
+			"-u _printf_float",
 			"-fno-common",
 			"-funsigned-char",								# Force 'char' to be unsigned by default. Not pretty since normally types are _signed_ by default.
 			"-funsigned-bitfields",							# Force bitfields to be unsigned by default.
@@ -103,7 +111,7 @@ $gpp_buildhandler = Class.new do
 			"-fdelete-dead-exceptions",						# Delete dead exceptions. Unlikely to do anything as exceptions are disabled.
 			"-freg-struct-return",							# Prefer to return composite types from functions in registers rather than on the stack.
 			"-funswitch-loops",							# Do not unswitch loops - unswitching generates worse code. TODO Investigate why. Likely GCC heuristic issue.
-			"-ftree-loop-vectorize",						# Perform loop vectorization. Generates better code for some reason. TODO Investigate why, as AVR has no concept of vectored code.
+			"-fno-tree-loop-vectorize",						# Perform loop vectorization. Generates better code for some reason. TODO Investigate why, as AVR has no concept of vectored code.
 			"-fsplit-paths",								# Do not split paths. Generates bloated code, but possible faster. TODO Investigate if it's faster.
 			"-ftree-pre",								# PRE for some reason generates bloated code. Likely GCC bug. TODO Investigate.
 			"-ftree-partial-pre",						# Making PRE more aggressive generates larger code.
@@ -154,7 +162,7 @@ $gpp_buildhandler = Class.new do
 			"-fno-unwind-tables",
 			"-fno-asynchronous-unwind-tables",
 			"-fno-strict-volatile-bitfields",
-			"-ffreestanding",
+			#"-ffreestanding",
 			"-fstack-check=no",
 			"-fno-stack-limit",
 			"-finline-small-functions",
@@ -170,6 +178,7 @@ $gpp_buildhandler = Class.new do
 			"-fbranch-target-load-optimize",
 			"-fno-ident",
 			"-fsection-anchors",
+			"-pipe",
 			#"-fpack-struct",
 			
 			"--param max-crossjump-edges=1073741824",
@@ -269,20 +278,35 @@ $gpp_buildhandler = Class.new do
 		}
 
 		buildopts = [
-			#"-fwhole-program",
+			"-fwhole-program",
 			"-T\"Teensy/mk66fx1m0.ld\"",
 			"-Wl,--defsym=__rtc_localtime=0",
-			"--specs=nosys.specs",
 			"-s",
 			#"-Wl,-R .comment -Wl,-R .gnu.version",
 			"-Wl,--gc-sections",
 			"-Wl,--relax",
 			"-Wl,-s",
+			"-Wl,--discard-all",
+			"-Wl,--nmagic",
+			"-Wl,-O3",
+			#"-Wl,--vfp11-denorm-fix=none",
+			#"-Wl,--orphan-handling=error",
 			#"-Wl,--no-warn-mismatch",
 			"#{lib_str}",
 			#"-lc",
-			#"-lg",
+
+			#"-lg_nano",
+			#"-lc_nano",
+			#"-lstdc++_nano",
+			#"-lsupc++_nano",
+			#"-lrdimon_nano",
+			#"-lgcc",
+			#"-lnosys",
+			#"-lgcov",
 			#"-L\"C:/Program Files (x86)/GNU Tools ARM Embedded/7 2017-q4-major/arm-none-eabi/lib/hard\"",
+			#"-lm",
+			"--specs=nosys.specs",
+			"--specs=nano.specs",
 			"-lm",
 		]
 

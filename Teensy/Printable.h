@@ -34,6 +34,7 @@ class Print;
 class Printable
 {
   public:
+    // virtual ~Printable() { __builtin_unreachable; }
     virtual size_t printTo(Print& p) const = 0;
 };
 
