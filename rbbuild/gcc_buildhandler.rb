@@ -64,13 +64,14 @@ $gpp_buildhandler = Class.new do
 			is_s(source) ? "-x assembler-with-cpp" : "",
 			is_c(source) ? "-std=gnu11" : "-std=gnu++17",	# set to the most recent spec the compiler can handle.
 			is_c(source) ? "" : "-fno-exceptions",			# disable exception handling.
-			#is_c(source) ? "" : "-fdeclone-ctor-dtor",		# enable decloning of constructor/destructors.
+			is_c(source) ? "" : "-fdeclone-ctor-dtor",		# enable decloning of constructor/destructors.
 			is_c(source) ? "" : "-fpermissive",				# allow non-conforming code.
 			is_c(source) ? "" : "-fno-threadsafe-statics",	# disable magic static code, as we don't have real threads.
 			is_c(source) ? "" : "-fno-enforce-eh-specs",
 			is_c(source) ? "" : "-fno-use-cxa-get-exception-ptr",
 			is_c(source) ? "" : "-felide-constructors",
-			"-Wno-deprecated",								# I like #include, damn it!
+			"-fdelete-null-pointer-checks",
+			"-Wno-deprecated",								# 
 			"-mfloat-abi=hard",
 			"-g0",											# Disable debugging information.
 			"-mcpu=cortex-m4",
@@ -141,9 +142,9 @@ $gpp_buildhandler = Class.new do
 			"-fno-unconstrained-commons",
 			"-fira-hoist-pressure",
 			"-fira-loop-pressure",
-			"-fira-region=mixed",							# 'all' is supposed to give the smallest size, but I find that 'mixed' does.
+			"-fira-region=one",							# 'all' is supposed to give the smallest size, but I find that 'mixed' does.
 			"-fno-semantic-interposition",
-			"-fno-printf-return-value",
+			"-fprintf-return-value",
 			"-flimit-function-alignment",
 			"-fuse-linker-plugin",
 			"-frename-registers",
@@ -158,6 +159,17 @@ $gpp_buildhandler = Class.new do
 			"-fno-stack-limit",
 			"-finline-small-functions",
 			"-findirect-inlining",
+			"-fsched-stalled-insns=0",
+			"-fsched-stalled-insns-dep=1073741824",
+			"-fsched2-use-superblocks",
+			"-fisolate-erroneous-paths-dereference",
+			"-fisolate-erroneous-paths-attribute",
+			"-flto-odr-type-merging",
+			"-fsplit-loops",
+			"-floop-unroll-and-jam",
+			"-fbranch-target-load-optimize",
+			"-fno-ident",
+			"-fsection-anchors",
 			#"-fpack-struct",
 			
 			"--param max-crossjump-edges=1073741824",
